@@ -15,6 +15,13 @@ import fadeBeardImage from "./IMG_0682.jpeg";
 import goateeBeardImage from "./IMG_0683.jpeg";
 import cleanShaveImage from "./IMG_0684.jpeg";
 
+import classicPermImage from "./IMG_0685.jpeg";
+import koreanPermImage from "./IMG_0686.jpeg";
+import texturedPermImage from "./IMG_0687.jpeg";
+import looseWavePermImage from "./IMG_0688.jpeg";
+import spiralPermImage from "./IMG_0689.jpeg";
+import modernPermImage from "./IMG_0690.jpeg";
+
 const WHATSAPP_NUMBER = "919310151087";
 
 const services = [
@@ -33,27 +40,10 @@ const services = [
       "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85",
   },
   {
-    title: "Hair Styling",
-    price: "₹299",
-    description: "Modern styling designed around your personality.",
-    image:
-      "https://images.unsplash.com/photo-1599351431202-1e0f0d1a7e8e?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Hair Wash",
-    price: "₹199",
-    description:
-      "Refresh, cleanse and prepare your hair for the perfect finish.",
-    image:
-      "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Premium Care",
-    price: "₹699",
-    description:
-      "A complete grooming experience using premium products.",
-    image:
-      "https://images.unsplash.com/photo-1517832207067-4db24a2ae47c?auto=format&fit=crop&w=900&q=85",
+    title: "Perms",
+    price: "₹999",
+    description: "Modern texture and natural-looking curls designed for your style.",
+    image: classicPermImage,
   },
 ];
 
@@ -167,6 +157,57 @@ const beardStyles = [
   },
 ];
 
+const permStyles = [
+  {
+    number: "01",
+    name: "Classic Perm",
+    price: "₹999",
+    description:
+      "Classic defined curls with natural volume for a timeless textured finish.",
+    image: classicPermImage,
+  },
+  {
+    number: "02",
+    name: "Korean Perm",
+    price: "₹1199",
+    description:
+      "Soft Korean-inspired waves with effortless movement and a clean modern finish.",
+    image: koreanPermImage,
+  },
+  {
+    number: "03",
+    name: "Textured Perm",
+    price: "₹1099",
+    description:
+      "Rich texture and controlled curls designed for volume, movement and definition.",
+    image: texturedPermImage,
+  },
+  {
+    number: "04",
+    name: "Loose Wave Perm",
+    price: "₹999",
+    description:
+      "Relaxed loose waves for a natural, effortless look with soft movement.",
+    image: looseWavePermImage,
+  },
+  {
+    number: "05",
+    name: "Spiral Perm",
+    price: "₹1299",
+    description:
+      "Defined spiral curls with bold texture and maximum personality.",
+    image: spiralPermImage,
+  },
+  {
+    number: "06",
+    name: "Modern Perm",
+    price: "₹1199",
+    description:
+      "A contemporary perm with balanced curls, texture and a fashion-forward finish.",
+    image: modernPermImage,
+  },
+];
+
 type Service = (typeof services)[number];
 
 function App() {
@@ -176,11 +217,12 @@ function App() {
   const [selectedService, setSelectedService] = useState("Haircut");
 
   const [currentPage, setCurrentPage] = useState<
-    "home" | "haircuts" | "beards"
+    "home" | "haircuts" | "beards" | "perms"
   >("home");
 
   const [selectedHaircut, setSelectedHaircut] = useState("");
   const [selectedBeard, setSelectedBeard] = useState("");
+  const [selectedPerm, setSelectedPerm] = useState("");
 
   const [serviceModalOpen, setServiceModalOpen] = useState(false);
   const [modalService, setModalService] = useState<Service | null>(null);
@@ -192,6 +234,10 @@ function App() {
 
   const selectedBeardData = beardStyles.find(
     (style) => style.name === selectedBeard
+  );
+
+  const selectedPermData = permStyles.find(
+    (style) => style.name === selectedPerm
   );
 
   useEffect(() => {
@@ -254,6 +300,17 @@ function App() {
     });
   };
 
+  const openPerms = () => {
+    setServiceModalOpen(false);
+    setCurrentPage("perms");
+    setMenuOpen(false);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const goHome = () => {
     setServiceModalOpen(false);
     setCurrentPage("home");
@@ -265,12 +322,6 @@ function App() {
       });
     }, 50);
   };
-
-  /*
-    IMPORTANT:
-    Popup ONLY opens after a specific haircut/beard style
-    is selected.
-  */
 
   const openStyleModal = (
     serviceTitle: string,
@@ -287,11 +338,19 @@ function App() {
     if (serviceTitle === "Haircut") {
       setSelectedHaircut(styleName);
       setSelectedBeard("");
+      setSelectedPerm("");
     }
 
     if (serviceTitle === "Beard Trim") {
       setSelectedBeard(styleName);
       setSelectedHaircut("");
+      setSelectedPerm("");
+    }
+
+    if (serviceTitle === "Perms") {
+      setSelectedPerm(styleName);
+      setSelectedHaircut("");
+      setSelectedBeard("");
     }
 
     setModalService(service);
@@ -307,6 +366,10 @@ function App() {
     openStyleModal("Beard Trim", style);
   };
 
+  const selectPerm = (style: string) => {
+    openStyleModal("Perms", style);
+  };
+
   const handleServiceChange = (service: string) => {
     setSelectedService(service);
 
@@ -316,6 +379,10 @@ function App() {
 
     if (service !== "Beard Trim") {
       setSelectedBeard("");
+    }
+
+    if (service !== "Perms") {
+      setSelectedPerm("");
     }
   };
 
@@ -358,6 +425,17 @@ function App() {
 
       if (selectedBeardData) {
         message += `Price: ${selectedBeardData.price}\n`;
+      }
+    }
+
+    if (selectedService === "Perms") {
+      message +=
+        `Perm Style: ${
+          selectedPerm || "Not selected"
+        }\n`;
+
+      if (selectedPermData) {
+        message += `Price: ${selectedPermData.price}\n`;
       }
     }
 
@@ -645,14 +723,6 @@ function App() {
                 transition={{
                   delay: index * 0.08,
                 }}
-
-                /*
-                  IMPORTANT:
-                  Haircut card -> Haircuts page
-                  Beard card -> Beards page
-                  Other services -> simply select
-                  NO POPUP HERE
-                */
                 onClick={() => {
 
                   if (
@@ -671,9 +741,14 @@ function App() {
                     return;
                   }
 
-                  setSelectedService(
-                    service.title
-                  );
+                  if (
+                    service.title ===
+                    "Perms"
+                  ) {
+                    openPerms();
+                    return;
+                  }
+
                 }}
               >
 
@@ -722,9 +797,13 @@ function App() {
                           return;
                         }
 
-                        setSelectedService(
-                          service.title
-                        );
+                        if (
+                          service.title ===
+                          "Perms"
+                        ) {
+                          openPerms();
+                          return;
+                        }
                       }}
                     >
                       →
@@ -1129,6 +1208,42 @@ function App() {
               </div>
             )}
 
+            {selectedPerm && (
+              <div className="booking-field-group">
+
+                <label>
+                  SELECTED PERM
+                </label>
+
+                <div className="selected-haircut-card">
+
+                  <div className="selected-haircut-icon">
+                    ✦
+                  </div>
+
+                  <div className="selected-haircut-info">
+
+                    <strong>
+                      {selectedPerm}
+                    </strong>
+
+                    <span>
+                      PERM STYLE
+                    </span>
+
+                  </div>
+
+                  <strong className="selected-haircut-price">
+                    {
+                      selectedPermData?.price
+                    }
+                  </strong>
+
+                </div>
+
+              </div>
+            )}
+
             <div className="booking-field-group">
 
               <label>
@@ -1331,20 +1446,23 @@ function App() {
   const pageContent =
     currentPage === "haircuts" ? (
       <HaircutsPage
-        selectedHaircut={
-          selectedHaircut
-        }
+        selectedHaircut={selectedHaircut}
         onBack={goHome}
         onSelect={selectHaircut}
         onBook={continueToBooking}
       />
     ) : currentPage === "beards" ? (
       <BeardsPage
-        selectedBeard={
-          selectedBeard
-        }
+        selectedBeard={selectedBeard}
         onBack={goHome}
         onSelect={selectBeard}
+        onBook={continueToBooking}
+      />
+    ) : currentPage === "perms" ? (
+      <PermsPage
+        selectedPerm={selectedPerm}
+        onBack={goHome}
+        onSelect={selectPerm}
         onBook={continueToBooking}
       />
     ) : (
@@ -1363,23 +1481,6 @@ function App() {
           setServiceModalOpen(false)
         }
         onBook={continueToBooking}
-        onChooseStyle={() => {
-
-          if (
-            modalService?.title ===
-            "Haircut"
-          ) {
-            openHaircuts();
-          }
-
-          if (
-            modalService?.title ===
-            "Beard Trim"
-          ) {
-            openBeards();
-          }
-
-        }}
       />
     </>
   );
@@ -1396,22 +1497,19 @@ function ServiceModal({
   styleName,
   onClose,
   onBook,
-  onChooseStyle,
 }: {
   open: boolean;
   service: Service | null;
   styleName: string;
   onClose: () => void;
   onBook: () => void;
-  onChooseStyle: () => void;
 }) {
-  if (!service) return null;
+  if (!service || !styleName) return null;
 
   let stylePrice = service.price;
 
   if (
-    service.title === "Haircut" &&
-    styleName
+    service.title === "Haircut"
   ) {
     const style =
       haircutStyles.find(
@@ -1425,11 +1523,24 @@ function ServiceModal({
   }
 
   if (
-    service.title === "Beard Trim" &&
-    styleName
+    service.title === "Beard Trim"
   ) {
     const style =
       beardStyles.find(
+        (item) =>
+          item.name === styleName
+      );
+
+    if (style) {
+      stylePrice = style.price;
+    }
+  }
+
+  if (
+    service.title === "Perms"
+  ) {
+    const style =
+      permStyles.find(
         (item) =>
           item.name === styleName
       );
@@ -1516,27 +1627,25 @@ function ServiceModal({
               </p>
 
               <h2 className="service-modal-title">
-                {styleName ||
-                  service.title}
+                {styleName}
               </h2>
 
               <p className="service-modal-description">
 
-                {styleName
-                  ? service.title ===
-                    "Haircut"
-                    ? "Your selected haircut style is ready. Continue to choose your preferred appointment time."
-                    : "Your selected beard style is ready. Continue to choose your preferred appointment time."
-                  : service.description}
+                {service.title ===
+                  "Haircut"
+                  ? "Your selected haircut style is ready. Continue to choose your preferred appointment time."
+                  : service.title ===
+                    "Beard Trim"
+                    ? "Your selected beard style is ready. Continue to choose your preferred appointment time."
+                    : "Your selected perm style is ready. Continue to choose your preferred appointment time."}
 
               </p>
 
               <div className="service-modal-meta">
 
                 <span>
-                  {styleName
-                    ? service.title.toUpperCase()
-                    : "SERVICE"}
+                  {service.title.toUpperCase()}
                 </span>
 
                 <strong>
@@ -1546,26 +1655,6 @@ function ServiceModal({
               </div>
 
               <div className="service-modal-actions">
-
-                {(
-                  service.title ===
-                    "Haircut" ||
-                  service.title ===
-                    "Beard Trim"
-                ) &&
-                  !styleName && (
-                    <button
-                      className="service-modal-secondary"
-                      onClick={
-                        onChooseStyle
-                      }
-                    >
-                      CHOOSE STYLE
-                      <span>
-                        ↗
-                      </span>
-                    </button>
-                  )}
 
                 <button
                   className="service-modal-primary"
@@ -2119,6 +2208,304 @@ function BeardsPage({
 
             <strong>
               {selectedBeard}
+            </strong>
+
+          </div>
+
+          <button
+            onClick={onBook}
+          >
+            CONTINUE TO BOOK
+            <span>
+              →
+            </span>
+          </button>
+
+        </section>
+      )}
+
+      <section className="haircuts-bottom">
+
+        <div>
+
+          <span>
+            READY FOR A CHANGE?
+          </span>
+
+          <h2>
+            BOOK YOUR
+            <br />
+            <em>
+              APPOINTMENT.
+            </em>
+          </h2>
+
+        </div>
+
+        <button
+          onClick={onBook}
+        >
+          BOOK NOW
+          <span>
+            ↗
+          </span>
+        </button>
+
+      </section>
+
+      <footer className="haircuts-footer">
+
+        <div className="haircuts-footer-logo">
+          THE<span>CUT</span>
+        </div>
+
+        <p>
+          MEN'S HAIR ARTIST
+          <br />
+          PRECISION · STYLE · IDENTITY
+        </p>
+
+        <button
+          onClick={onBack}
+        >
+          BACK TO HOME ↑
+        </button>
+
+      </footer>
+
+    </main>
+  );
+}
+
+
+/* =====================================================
+   PERMS PAGE
+===================================================== */
+
+function PermsPage({
+  selectedPerm,
+  onBack,
+  onSelect,
+  onBook,
+}: {
+  selectedPerm: string;
+  onBack: () => void;
+  onSelect: (style: string) => void;
+  onBook: () => void;
+}) {
+  return (
+    <main className="haircuts-page">
+
+      <header className="haircuts-nav">
+
+        <button
+          className="haircuts-logo"
+          onClick={onBack}
+        >
+          THE<span>CUT</span>
+        </button>
+
+        <nav className="haircuts-nav-links">
+
+          <button onClick={onBack}>
+            HOME
+          </button>
+
+          <span>SERVICES</span>
+          <span>ABOUT</span>
+          <span>GALLERY</span>
+          <span>CONTACT</span>
+
+        </nav>
+
+        <button
+          className="haircuts-book"
+          onClick={onBook}
+        >
+          BOOK APPOINTMENT
+          <span>↗</span>
+        </button>
+
+      </header>
+
+      <section className="haircuts-hero">
+
+        <div className="haircuts-hero-content">
+
+          <p className="haircuts-eyebrow">
+            OUR SERVICES
+          </p>
+
+          <h1>
+            Perms
+            <br />
+            <em>
+              Find Your Texture.
+            </em>
+          </h1>
+
+          <p className="haircuts-hero-text">
+            From soft Korean waves to defined
+            spiral curls, choose a perm style
+            designed around your hair and
+            personality.
+          </p>
+
+        </div>
+
+        <div className="haircuts-hero-side">
+
+          <span />
+
+          <p>
+            Texture,
+            <br />
+            redefined.
+          </p>
+
+        </div>
+
+      </section>
+
+      <section className="haircut-selection">
+
+        <div className="haircut-section-heading">
+
+          <div>
+
+            <span>
+              01 / CHOOSE YOUR LOOK
+            </span>
+
+            <h2>
+              SELECT YOUR
+              <br />
+              <em>
+                PERM.
+              </em>
+            </h2>
+
+          </div>
+
+          <p>
+            Choose the perm style you want.
+            Your selection will be added to
+            your appointment request.
+          </p>
+
+        </div>
+
+        <div className="haircut-grid">
+
+          {permStyles.map(
+            (style) => {
+
+              const isSelected =
+                selectedPerm ===
+                style.name;
+
+              return (
+                <motion.article
+                  className={`haircut-card ${
+                    isSelected
+                      ? "haircut-selected"
+                      : ""
+                  }`}
+                  key={style.name}
+                  initial={{
+                    opacity: 0,
+                    y: 30,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                  }}
+                >
+
+                  <div className="haircut-image">
+
+                    <img
+                      src={style.image}
+                      alt={style.name}
+                    />
+
+                    <div className="haircut-number">
+                      {style.number}
+                    </div>
+
+                  </div>
+
+                  <div className="haircut-info">
+
+                    <p className="haircut-small">
+                      PERM /{" "}
+                      {style.number}
+                    </p>
+
+                    <h3>
+                      {style.name}
+                    </h3>
+
+                    <p className="haircut-description">
+                      {style.description}
+                    </p>
+
+                    <div className="haircut-action-box">
+
+                      <strong className="haircut-price">
+                        {style.price}
+                      </strong>
+
+                      <button
+                        className="haircut-select"
+                        onClick={() =>
+                          onSelect(
+                            style.name
+                          )
+                        }
+                      >
+                        {isSelected
+                          ? "SELECTED"
+                          : "SELECT"}
+
+                        <span>
+                          {isSelected
+                            ? "✓"
+                            : "→"}
+                        </span>
+
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                </motion.article>
+              );
+            }
+          )}
+
+        </div>
+
+      </section>
+
+      {selectedPerm && (
+        <section className="selected-style-bar">
+
+          <div>
+
+            <span>
+              YOUR SELECTED PERM
+            </span>
+
+            <strong>
+              {selectedPerm}
             </strong>
 
           </div>
