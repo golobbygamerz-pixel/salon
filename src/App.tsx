@@ -10,7 +10,7 @@ import midlineImage from "./IMG_0674.jpeg";
 import wolfImage from "./IMG_0675.jpeg";
 import modCutImage from "./IMG_0677.jpeg";
 
-const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const WHATSAPP_NUMBER = "919310151087";
 
 const services = [
   {
