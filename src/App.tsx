@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
+import heroImage from "./hero.jpg";
 
 const WHATSAPP_NUMBER = "91XXXXXXXXXX";
 
@@ -9,85 +10,85 @@ const services = [
     name: "Classic Cut",
     description: "Clean, timeless and perfectly structured.",
     time: "30 MIN",
-    price: "₹400"
+    price: "₹400",
   },
   {
     number: "02",
     name: "Low Fade",
     description: "Subtle fade with a clean modern finish.",
     time: "40 MIN",
-    price: "₹500"
+    price: "₹500",
   },
   {
     number: "03",
     name: "Mid Fade",
     description: "Balanced fade designed for everyday style.",
     time: "40 MIN",
-    price: "₹500"
+    price: "₹500",
   },
   {
     number: "04",
     name: "High Fade",
     description: "Sharp, bold and high-contrast finish.",
     time: "45 MIN",
-    price: "₹550"
+    price: "₹550",
   },
   {
     number: "05",
     name: "Skin Fade",
     description: "Ultra-clean skin fade with precision detailing.",
     time: "50 MIN",
-    price: "₹600"
+    price: "₹600",
   },
   {
     number: "06",
     name: "Taper",
     description: "Natural taper for a refined modern look.",
     time: "40 MIN",
-    price: "₹500"
+    price: "₹500",
   },
   {
     number: "07",
     name: "Textured Crop",
     description: "Modern texture with effortless movement.",
     time: "45 MIN",
-    price: "₹550"
+    price: "₹550",
   },
   {
     number: "08",
     name: "French Crop",
     description: "Sharp fringe with a contemporary silhouette.",
     time: "45 MIN",
-    price: "₹550"
+    price: "₹550",
   },
   {
     number: "09",
     name: "Buzz Cut",
     description: "Minimal, masculine and extremely clean.",
     time: "25 MIN",
-    price: "₹350"
+    price: "₹350",
   },
   {
     number: "10",
     name: "Scissor Cut",
     description: "Detailed scissor work tailored to your face.",
     time: "45 MIN",
-    price: "₹550"
+    price: "₹550",
   },
   {
     number: "11",
     name: "Quiff",
     description: "Volume, structure and a premium finish.",
     time: "45 MIN",
-    price: "₹600"
+    price: "₹600",
   },
   {
     number: "12",
     name: "Long Hair Styling",
     description: "Shape and styling for longer men's hair.",
     time: "50 MIN",
-    price: "₹650"
-  }
+    price: "₹650",
+  },
 ];
 
 const styles = [
@@ -95,26 +96,26 @@ const styles = [
     name: "THE TAPER",
     category: "TAPER",
     image:
-      "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85"
+      "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85",
   },
   {
     name: "THE FADE",
     category: "FADE",
     image:
-      "https://images.unsplash.com/photo-1599351431202-1e0f0d4c0f8d?auto=format&fit=crop&w=900&q=85"
+      "https://images.unsplash.com/photo-1599351431202-1e0f0d4c0f8d?auto=format&fit=crop&w=900&q=85",
   },
   {
     name: "TEXTURED",
     category: "TEXTURED",
     image:
-      "https://images.unsplash.com/photo-1622286346003-c0f2f7c6d7c5?auto=format&fit=crop&w=900&q=85"
+      "https://images.unsplash.com/photo-1622286346003-c0f2f7c6d7c5?auto=format&fit=crop&w=900&q=85",
   },
   {
     name: "CLASSIC",
     category: "CLASSIC",
     image:
-      "https://images.unsplash.com/photo-1622288432450-277d0fef5ed6?auto=format&fit=crop&w=900&q=85"
-  }
+      "https://images.unsplash.com/photo-1622288432450-277d0fef5ed6?auto=format&fit=crop&w=900&q=85",
+  },
 ];
 
 const reviews = [
@@ -122,42 +123,43 @@ const reviews = [
     quote:
       "Best haircut I've had in a long time. The attention to detail is seriously different.",
     name: "ARJUN M.",
-    role: "CLIENT"
+    role: "CLIENT",
   },
   {
     quote:
       "Finally found someone who actually understands what hairstyle suits my face.",
     name: "KARAN S.",
-    role: "CLIENT"
+    role: "CLIENT",
   },
   {
     quote:
       "Clean work, great consultation and an amazing finish. Definitely coming back.",
     name: "ROHAN K.",
-    role: "CLIENT"
-  }
+    role: "CLIENT",
+  },
 ];
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("Skin Fade");
+
   const [form, setForm] = useState({
     name: "",
     phone: "",
     date: "",
     time: "",
-    notes: ""
+    notes: "",
   });
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth"
+      behavior: "smooth",
     });
 
     setMenuOpen(false);
   };
 
-  const handleBooking = (e: React.FormEvent) => {
+  const handleBooking = (e: FormEvent) => {
     e.preventDefault();
 
     if (!form.name || !form.phone || !form.date || !form.time) {
@@ -187,7 +189,6 @@ Please confirm my appointment.
 
   return (
     <div className="site">
-
       {/* NAVIGATION */}
       <header className="navbar">
         <div
@@ -198,11 +199,25 @@ Please confirm my appointment.
         </div>
 
         <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <button onClick={() => scrollTo("home")}>HOME</button>
-          <button onClick={() => scrollTo("about")}>ABOUT</button>
-          <button onClick={() => scrollTo("services")}>SERVICES</button>
-          <button onClick={() => scrollTo("work")}>WORK</button>
-          <button onClick={() => scrollTo("reviews")}>REVIEWS</button>
+          <button onClick={() => scrollTo("home")}>
+            HOME
+          </button>
+
+          <button onClick={() => scrollTo("about")}>
+            ABOUT
+          </button>
+
+          <button onClick={() => scrollTo("services")}>
+            SERVICES
+          </button>
+
+          <button onClick={() => scrollTo("work")}>
+            WORK
+          </button>
+
+          <button onClick={() => scrollTo("reviews")}>
+            REVIEWS
+          </button>
         </nav>
 
         <button
@@ -224,12 +239,10 @@ Please confirm my appointment.
 
       {/* HERO */}
       <main id="home">
-
         <section className="hero">
-
           <div className="hero-image">
             <img
-              src="/src/hero.jpg"
+              src={heroImage}
               alt="Men's haircut"
             />
           </div>
@@ -237,7 +250,6 @@ Please confirm my appointment.
           <div className="hero-overlay"></div>
 
           <div className="hero-content">
-
             <motion.p
               className="eyebrow"
               initial={{ opacity: 0, y: 20 }}
@@ -250,7 +262,10 @@ Please confirm my appointment.
             <motion.h1
               initial={{ opacity: 0, y: 35 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.15,
+              }}
             >
               THE ART
               <br />
@@ -263,7 +278,10 @@ Please confirm my appointment.
               className="hero-description"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.4,
+              }}
             >
               Precision men's grooming built around
               your face, your style and your identity.
@@ -285,14 +303,12 @@ Please confirm my appointment.
                 VIEW MY WORK
               </button>
             </div>
-
           </div>
 
           <div className="hero-bottom">
             <span>SCROLL TO EXPLORE</span>
             <div className="scroll-line"></div>
           </div>
-
         </section>
 
         {/* INTRO */}
@@ -306,7 +322,6 @@ Please confirm my appointment.
           </div>
 
           <div className="intro-grid">
-
             <div>
               <h2>
                 MORE THAN A
@@ -317,14 +332,16 @@ Please confirm my appointment.
 
             <div className="intro-text">
               <p className="large-text">
-                Your haircut is part of how you present yourself.
-                It should feel personal, intentional and completely you.
+                Your haircut is part of how you present
+                yourself. It should feel personal,
+                intentional and completely you.
               </p>
 
               <p>
-                Every cut starts with understanding your face shape,
-                hair texture and personal style. From classic cuts
-                to modern fades, every detail is finished by hand.
+                Every cut starts with understanding your
+                face shape, hair texture and personal style.
+                From classic cuts to modern fades, every
+                detail is finished by hand.
               </p>
 
               <button
@@ -334,11 +351,9 @@ Please confirm my appointment.
                 EXPLORE SERVICES <span>→</span>
               </button>
             </div>
-
           </div>
 
           <div className="stats">
-
             <div>
               <strong>5+</strong>
               <span>YEARS EXPERIENCE</span>
@@ -353,7 +368,6 @@ Please confirm my appointment.
               <strong>100%</strong>
               <span>PERSONALIZED</span>
             </div>
-
           </div>
         </section>
 
@@ -381,12 +395,13 @@ Please confirm my appointment.
           </div>
 
           <div className="service-list">
-
             {services.map((service) => (
               <div
                 className="service-row"
                 key={service.number}
-                onClick={() => setSelectedService(service.name)}
+                onClick={() =>
+                  setSelectedService(service.name)
+                }
               >
                 <span className="service-number">
                   {service.number}
@@ -407,7 +422,6 @@ Please confirm my appointment.
                 </span>
               </div>
             ))}
-
           </div>
         </section>
 
@@ -435,17 +449,24 @@ Please confirm my appointment.
           </div>
 
           <div className="gallery">
-
             {styles.map((style, index) => (
               <motion.article
                 className={`gallery-card card-${index}`}
                 key={style.name}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                initial={{
+                  opacity: 0,
+                  y: 40,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                }}
                 transition={{
                   duration: 0.6,
-                  delay: index * 0.1
+                  delay: index * 0.1,
                 }}
               >
                 <img
@@ -455,28 +476,31 @@ Please confirm my appointment.
 
                 <div className="gallery-overlay">
                   <span>{style.category}</span>
+
                   <h3>{style.name}</h3>
-                  <span className="gallery-arrow">↗</span>
+
+                  <span className="gallery-arrow">
+                    ↗
+                  </span>
                 </div>
               </motion.article>
             ))}
-
           </div>
         </section>
 
         {/* SIGNATURE STYLES */}
         <section className="signature section-dark">
-
           <div className="section-label light">
             <span>04</span>
             SIGNATURE STYLES
           </div>
 
           <div className="signature-content">
-
             <div className="signature-item active">
               <span>01</span>
+
               <h3>THE TAPER</h3>
+
               <p>
                 Clean sides. Natural finish.
                 Perfect for everyday style.
@@ -485,7 +509,9 @@ Please confirm my appointment.
 
             <div className="signature-item">
               <span>02</span>
+
               <h3>SKIN FADE</h3>
+
               <p>
                 Maximum contrast with
                 razor-sharp detailing.
@@ -494,7 +520,9 @@ Please confirm my appointment.
 
             <div className="signature-item">
               <span>03</span>
+
               <h3>TEXTURED CROP</h3>
+
               <p>
                 Contemporary texture with
                 effortless movement.
@@ -503,27 +531,25 @@ Please confirm my appointment.
 
             <div className="signature-item">
               <span>04</span>
+
               <h3>CLASSIC</h3>
+
               <p>
                 Timeless shape with
                 modern precision.
               </p>
             </div>
-
           </div>
-
         </section>
 
         {/* WHY */}
         <section className="why section">
-
           <div className="section-label">
             <span>05</span>
             THE DIFFERENCE
           </div>
 
           <div className="why-grid">
-
             <h2>
               DETAILS
               <br />
@@ -531,10 +557,11 @@ Please confirm my appointment.
             </h2>
 
             <div className="why-list">
-
               <div>
                 <span>01</span>
+
                 <h3>PRECISION</h3>
+
                 <p>
                   Every line, fade and transition
                   is finished with intention.
@@ -543,7 +570,9 @@ Please confirm my appointment.
 
               <div>
                 <span>02</span>
+
                 <h3>PERSONAL</h3>
+
                 <p>
                   Your haircut is designed around
                   your face and individual style.
@@ -552,7 +581,9 @@ Please confirm my appointment.
 
               <div>
                 <span>03</span>
+
                 <h3>DETAIL</h3>
+
                 <p>
                   Clean finishing, sharp edges
                   and attention to the smallest details.
@@ -561,17 +592,16 @@ Please confirm my appointment.
 
               <div>
                 <span>04</span>
+
                 <h3>MODERN</h3>
+
                 <p>
                   Contemporary styles without
                   losing timeless craftsmanship.
                 </p>
               </div>
-
             </div>
-
           </div>
-
         </section>
 
         {/* REVIEWS */}
@@ -579,7 +609,6 @@ Please confirm my appointment.
           className="reviews section-dark"
           id="reviews"
         >
-
           <div className="section-label light">
             <span>06</span>
             CLIENT REVIEWS
@@ -592,7 +621,6 @@ Please confirm my appointment.
           </h2>
 
           <div className="review-grid">
-
             {reviews.map((review) => (
               <article
                 className="review-card"
@@ -608,13 +636,12 @@ Please confirm my appointment.
 
                 <div className="review-author">
                   <strong>{review.name}</strong>
+
                   <span>{review.role}</span>
                 </div>
               </article>
             ))}
-
           </div>
-
         </section>
 
         {/* BOOKING */}
@@ -622,16 +649,13 @@ Please confirm my appointment.
           className="booking section"
           id="booking"
         >
-
           <div className="section-label">
             <span>07</span>
             BOOK YOUR CUT
           </div>
 
           <div className="booking-grid">
-
             <div className="booking-intro">
-
               <h2>
                 YOUR NEXT
                 <br />
@@ -642,27 +666,28 @@ Please confirm my appointment.
 
               <p>
                 Select your service, choose your preferred
-                time and send your request directly on WhatsApp.
+                time and send your request directly on
+                WhatsApp.
               </p>
 
               <div className="booking-note">
                 <span>01</span>
+
                 <div>
                   <strong>WHATSAPP BOOKING</strong>
+
                   <p>
                     Your appointment request will be
                     sent directly to the barber.
                   </p>
                 </div>
               </div>
-
             </div>
 
             <form
               className="booking-form"
               onSubmit={handleBooking}
             >
-
               <div className="form-group">
                 <label>YOUR NAME</label>
 
@@ -673,7 +698,7 @@ Please confirm my appointment.
                   onChange={(e) =>
                     setForm({
                       ...form,
-                      name: e.target.value
+                      name: e.target.value,
                     })
                   }
                 />
@@ -689,7 +714,7 @@ Please confirm my appointment.
                   onChange={(e) =>
                     setForm({
                       ...form,
-                      phone: e.target.value
+                      phone: e.target.value,
                     })
                   }
                 />
@@ -716,7 +741,6 @@ Please confirm my appointment.
               </div>
 
               <div className="form-row">
-
                 <div className="form-group">
                   <label>DATE</label>
 
@@ -726,7 +750,7 @@ Please confirm my appointment.
                     onChange={(e) =>
                       setForm({
                         ...form,
-                        date: e.target.value
+                        date: e.target.value,
                       })
                     }
                   />
@@ -741,12 +765,11 @@ Please confirm my appointment.
                     onChange={(e) =>
                       setForm({
                         ...form,
-                        time: e.target.value
+                        time: e.target.value,
                       })
                     }
                   />
                 </div>
-
               </div>
 
               <div className="form-group">
@@ -758,7 +781,7 @@ Please confirm my appointment.
                   onChange={(e) =>
                     setForm({
                       ...form,
-                      notes: e.target.value
+                      notes: e.target.value,
                     })
                   }
                 />
@@ -771,18 +794,13 @@ Please confirm my appointment.
                 CONFIRM VIA WHATSAPP
                 <span>↗</span>
               </button>
-
             </form>
-
           </div>
-
         </section>
 
         {/* LOCATION */}
         <section className="location section-dark">
-
           <div className="location-grid">
-
             <div>
               <div className="section-label light">
                 <span>08</span>
@@ -797,9 +815,9 @@ Please confirm my appointment.
             </div>
 
             <div className="location-info">
-
               <div>
                 <span>LOCATION</span>
+
                 <p>
                   Your Salon Name
                   <br />
@@ -809,6 +827,7 @@ Please confirm my appointment.
 
               <div>
                 <span>OPENING HOURS</span>
+
                 <p>
                   MON — SAT
                   <br />
@@ -818,6 +837,7 @@ Please confirm my appointment.
 
               <div>
                 <span>CONTACT</span>
+
                 <p>
                   WhatsApp
                   <br />
@@ -828,19 +848,15 @@ Please confirm my appointment.
               <button className="map-button">
                 OPEN GOOGLE MAPS ↗
               </button>
-
             </div>
-
           </div>
-
         </section>
 
         {/* FINAL CTA */}
         <section className="final-cta">
-
           <div className="final-image">
             <img
-              src="/src/hero.jpg"
+              src={heroImage}
               alt="Men's barber style"
             />
           </div>
@@ -848,10 +864,7 @@ Please confirm my appointment.
           <div className="final-overlay"></div>
 
           <div className="final-content">
-
-            <span>
-              READY FOR A CHANGE?
-            </span>
+            <span>READY FOR A CHANGE?</span>
 
             <h2>
               MAKE YOUR
@@ -866,18 +879,13 @@ Please confirm my appointment.
               BOOK YOUR CUT
               <span>↗</span>
             </button>
-
           </div>
-
         </section>
-
       </main>
 
       {/* FOOTER */}
       <footer className="footer">
-
         <div className="footer-top">
-
           <div className="footer-logo">
             THE<span>CUT</span>
           </div>
@@ -889,32 +897,42 @@ Please confirm my appointment.
           </p>
 
           <div className="footer-links">
-            <button onClick={() => scrollTo("home")}>
+            <button
+              onClick={() => scrollTo("home")}
+            >
               HOME
             </button>
 
-            <button onClick={() => scrollTo("services")}>
+            <button
+              onClick={() => scrollTo("services")}
+            >
               SERVICES
             </button>
 
-            <button onClick={() => scrollTo("work")}>
+            <button
+              onClick={() => scrollTo("work")}
+            >
               WORK
             </button>
 
-            <button onClick={() => scrollTo("booking")}>
+            <button
+              onClick={() => scrollTo("booking")}
+            >
               BOOK
             </button>
           </div>
-
         </div>
 
         <div className="footer-bottom">
-          <span>© 2026 THE CUT. ALL RIGHTS RESERVED.</span>
-          <span>BUILT FOR MEN WHO CARE ABOUT THEIR STYLE.</span>
+          <span>
+            © 2026 THE CUT. ALL RIGHTS RESERVED.
+          </span>
+
+          <span>
+            BUILT FOR MEN WHO CARE ABOUT THEIR STYLE.
+          </span>
         </div>
-
       </footer>
-
     </div>
   );
 }
