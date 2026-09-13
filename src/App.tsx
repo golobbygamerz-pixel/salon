@@ -1,923 +1,757 @@
 import { useState, type FormEvent } from "react";
+
 import { motion } from "framer-motion";
+
 import heroImage from "./IMG_0660.jpeg";
 
 const WHATSAPP_NUMBER = "91XXXXXXXXXX";
 
 const services = [
+
   {
-    number: "01",
-    name: "Classic Cut",
-    description: "Clean, timeless and perfectly structured.",
-    time: "30 MIN",
-    price: "₹400",
+
+    title: "Haircut",
+
+    price: "₹399",
+
+    description: "Precision cuts crafted for a sharp, modern look.",
+
+    image:
+
+      "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85",
+
   },
+
   {
-    number: "02",
-    name: "Low Fade",
-    description: "Subtle fade with a clean modern finish.",
-    time: "40 MIN",
-    price: "₹500",
+
+    title: "Beard Trim",
+
+    price: "₹249",
+
+    description: "Clean lines and perfect shape for a stronger presence.",
+
+    image:
+
+      "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85",
+
   },
+
   {
-    number: "03",
-    name: "Mid Fade",
-    description: "Balanced fade designed for everyday style.",
-    time: "40 MIN",
-    price: "₹500",
+
+    title: "Hair Styling",
+
+    price: "₹299",
+
+    description: "Modern styling designed around your personality.",
+
+    image:
+
+      "https://images.unsplash.com/photo-1599351431202-1e0f0d1a7e8e?auto=format&fit=crop&w=900&q=85",
+
   },
+
   {
-    number: "04",
-    name: "High Fade",
-    description: "Sharp, bold and high-contrast finish.",
-    time: "45 MIN",
-    price: "₹550",
+
+    title: "Hair Wash",
+
+    price: "₹199",
+
+    description: "Refresh, cleanse and prepare your hair for the perfect finish.",
+
+    image:
+
+      "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&q=85",
+
   },
+
   {
-    number: "05",
-    name: "Skin Fade",
-    description: "Ultra-clean skin fade with precision detailing.",
-    time: "50 MIN",
-    price: "₹600",
+
+    title: "Premium Care",
+
+    price: "₹699",
+
+    description: "A complete grooming experience using premium products.",
+
+    image:
+
+      "https://images.unsplash.com/photo-1517832207067-4db24a2ae47c?auto=format&fit=crop&w=900&q=85",
+
   },
-  {
-    number: "06",
-    name: "Taper",
-    description: "Natural taper for a refined modern look.",
-    time: "40 MIN",
-    price: "₹500",
-  },
-  {
-    number: "07",
-    name: "Textured Crop",
-    description: "Modern texture with effortless movement.",
-    time: "45 MIN",
-    price: "₹550",
-  },
-  {
-    number: "08",
-    name: "French Crop",
-    description: "Sharp fringe with a contemporary silhouette.",
-    time: "45 MIN",
-    price: "₹550",
-  },
-  {
-    number: "09",
-    name: "Buzz Cut",
-    description: "Minimal, masculine and extremely clean.",
-    time: "25 MIN",
-    price: "₹350",
-  },
-  {
-    number: "10",
-    name: "Scissor Cut",
-    description: "Detailed scissor work tailored to your face.",
-    time: "45 MIN",
-    price: "₹550",
-  },
-  {
-    number: "11",
-    name: "Quiff",
-    description: "Volume, structure and a premium finish.",
-    time: "45 MIN",
-    price: "₹600",
-  },
-  {
-    number: "12",
-    name: "Long Hair Styling",
-    description: "Shape and styling for longer men's hair.",
-    time: "50 MIN",
-    price: "₹650",
-  },
+
 ];
 
-const styles = [
-  {
-    name: "THE TAPER",
-    category: "TAPER",
-    image:
-      "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    name: "THE FADE",
-    category: "FADE",
-    image:
-      "https://images.unsplash.com/photo-1599351431202-1e0f0d4c0f8d?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    name: "TEXTURED",
-    category: "TEXTURED",
-    image:
-      "https://images.unsplash.com/photo-1622286346003-c0f2f7c6d7c5?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    name: "CLASSIC",
-    category: "CLASSIC",
-    image:
-      "https://images.unsplash.com/photo-1622288432450-277d0fef5ed6?auto=format&fit=crop&w=900&q=85",
-  },
+const gallery = [
+
+  "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=85",
+
+  "https://images.unsplash.com/photo-1512690459411-b9245aed614b?auto=format&fit=crop&w=1200&q=85",
+
+  "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=85",
+
 ];
 
 const reviews = [
+
   {
-    quote:
-      "Best haircut I've had in a long time. The attention to detail is seriously different.",
-    name: "ARJUN M.",
-    role: "CLIENT",
+
+    name: "Arjun",
+
+    text: "Best haircut I've had in a long time. The attention to detail is insane.",
+
   },
+
   {
-    quote:
-      "Finally found someone who actually understands what hairstyle suits my face.",
-    name: "KARAN S.",
-    role: "CLIENT",
+
+    name: "Rahul",
+
+    text: "Clean space, great vibe and the barber actually understands the style you want.",
+
   },
+
   {
-    quote:
-      "Clean work, great consultation and an amazing finish. Definitely coming back.",
-    name: "ROHAN K.",
-    role: "CLIENT",
+
+    name: "Karan",
+
+    text: "Premium experience without the unnecessary attitude. Definitely coming back.",
+
   },
+
 ];
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState("Skin Fade");
 
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    date: "",
-    time: "",
-    notes: "",
-  });
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [date, setDate] = useState("");
+
+  const [time, setTime] = useState("");
+
+  const [selectedService, setSelectedService] = useState("Haircut");
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth",
-    });
+
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
     setMenuOpen(false);
+
   };
 
-  const handleBooking = (e: FormEvent) => {
-    e.preventDefault();
+  const bookAppointment = (e?: FormEvent) => {
 
-    if (!form.name || !form.phone || !form.date || !form.time) {
-      alert("Please fill in your name, phone, date and time.");
-      return;
-    }
+    e?.preventDefault();
 
-    const message = `
-BOOKING REQUEST — THE CUT
+    const message =
 
-Name: ${form.name}
-Phone: ${form.phone}
-Service: ${selectedService}
-Date: ${form.date}
-Time: ${form.time}
-Notes: ${form.notes || "None"}
+      `*NEW APPOINTMENT REQUEST*\n\n` +
 
-Please confirm my appointment.
-    `.trim();
+      `Service: ${selectedService}\n` +
 
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      message
-    )}`;
+      `Date: ${date || "Not selected"}\n` +
 
-    window.open(url, "_blank");
+      `Time: ${time || "Not selected"}\n\n` +
+
+      `I would like to book an appointment.`;
+
+    window.open(
+
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
+
+      "_blank"
+
+    );
+
   };
 
   return (
-    <div className="site">
-      {/* NAVIGATION */}
+
+    <main>
+
+      {/* NAVBAR */}
+
       <header className="navbar">
-        <div
-          className="logo"
-          onClick={() => scrollTo("home")}
-        >
-          THE<span>CUT</span>
+
+        <div className="nav-inner">
+
+          <button className="logo" onClick={() => scrollTo("home")}>
+
+            THE CUT
+
+            <span>MEN'S HAIR ARTIST</span>
+
+          </button>
+
+          <nav className={menuOpen ? "nav-links open" : "nav-links"}>
+
+            <button onClick={() => scrollTo("home")}>Home</button>
+
+            <button onClick={() => scrollTo("services")}>Services</button>
+
+            <button onClick={() => scrollTo("about")}>About</button>
+
+            <button onClick={() => scrollTo("gallery")}>Gallery</button>
+
+            <button onClick={() => scrollTo("contact")}>Contact</button>
+
+          </nav>
+
+          <button
+
+            className="nav-book"
+
+            onClick={() => scrollTo("booking")}
+
+          >
+
+            <span>□</span>
+
+            Book Appointment
+
+          </button>
+
+          <button
+
+            className="menu-button"
+
+            onClick={() => setMenuOpen(!menuOpen)}
+
+          >
+
+            {menuOpen ? "×" : "☰"}
+
+          </button>
+
         </div>
 
-        <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <button onClick={() => scrollTo("home")}>
-            HOME
-          </button>
-
-          <button onClick={() => scrollTo("about")}>
-            ABOUT
-          </button>
-
-          <button onClick={() => scrollTo("services")}>
-            SERVICES
-          </button>
-
-          <button onClick={() => scrollTo("work")}>
-            WORK
-          </button>
-
-          <button onClick={() => scrollTo("reviews")}>
-            REVIEWS
-          </button>
-        </nav>
-
-        <button
-          className="nav-book"
-          onClick={() => scrollTo("booking")}
-        >
-          BOOK APPOINTMENT
-        </button>
-
-        <button
-          className="menu-button"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Open menu"
-        >
-          <span></span>
-          <span></span>
-        </button>
       </header>
 
       {/* HERO */}
-      <main id="home">
-        <section className="hero">
-          <div className="hero-image">
-            <img
-              src={heroImage}
-              alt="Men's haircut"
-            />
-          </div>
 
-          <div className="hero-overlay"></div>
+      <section id="home" className="hero">
 
-          <div className="hero-content">
-            <motion.p
-              className="eyebrow"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              MEN'S HAIR ARTIST · PRECISION · STYLE
-            </motion.p>
+        <img className="hero-bg" src={heroImage} alt="Men's haircut" />
 
-            <motion.h1
-              initial={{ opacity: 0, y: 35 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.15,
-              }}
-            >
-              THE ART
+        <div className="hero-overlay" />
+
+        <div className="hero-content">
+
+          <motion.div
+
+            className="hero-copy"
+
+            initial={{ opacity: 0, y: 30 }}
+
+            animate={{ opacity: 1, y: 0 }}
+
+            transition={{ duration: 0.8 }}
+
+          >
+
+            <p className="eyebrow">MORE THAN A HAIRCUT</p>
+
+            <h1>
+
+              Premium Cuts,
+
               <br />
-              OF THE
-              <br />
-              <em>PERFECT CUT.</em>
-            </motion.h1>
 
-            <motion.p
-              className="hero-description"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.4,
-              }}
-            >
-              Precision men's grooming built around
-              your face, your style and your identity.
-            </motion.p>
+              <span>Modern Style.</span>
 
-            <div className="hero-actions">
-              <button
-                className="primary-button"
-                onClick={() => scrollTo("booking")}
-              >
-                BOOK APPOINTMENT
-                <span>↗</span>
-              </button>
+            </h1>
 
-              <button
-                className="text-button"
-                onClick={() => scrollTo("work")}
-              >
-                VIEW MY WORK
-              </button>
-            </div>
-          </div>
+            <p className="hero-description">
 
-          <div className="hero-bottom">
-            <span>SCROLL TO EXPLORE</span>
-            <div className="scroll-line"></div>
-          </div>
-        </section>
+              Expert haircuts, clean fades, and personalized grooming —
 
-        {/* INTRO */}
-        <section
-          className="intro section"
-          id="about"
-        >
-          <div className="section-label">
-            <span>01</span>
-            ABOUT THE ARTIST
-          </div>
+              designed for the modern man.
 
-          <div className="intro-grid">
-            <div>
-              <h2>
-                MORE THAN A
-                <br />
-                <em>HAIRCUT.</em>
-              </h2>
-            </div>
-
-            <div className="intro-text">
-              <p className="large-text">
-                Your haircut is part of how you present
-                yourself. It should feel personal,
-                intentional and completely you.
-              </p>
-
-              <p>
-                Every cut starts with understanding your
-                face shape, hair texture and personal style.
-                From classic cuts to modern fades, every
-                detail is finished by hand.
-              </p>
-
-              <button
-                className="line-button"
-                onClick={() => scrollTo("services")}
-              >
-                EXPLORE SERVICES <span>→</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="stats">
-            <div>
-              <strong>5+</strong>
-              <span>YEARS EXPERIENCE</span>
-            </div>
-
-            <div>
-              <strong>1K+</strong>
-              <span>CUTS COMPLETED</span>
-            </div>
-
-            <div>
-              <strong>100%</strong>
-              <span>PERSONALIZED</span>
-            </div>
-          </div>
-        </section>
-
-        {/* SERVICES */}
-        <section
-          className="services section-dark"
-          id="services"
-        >
-          <div className="section-label light">
-            <span>02</span>
-            SERVICES
-          </div>
-
-          <div className="services-heading">
-            <h2>
-              BUILT FOR
-              <br />
-              <em>YOUR STYLE.</em>
-            </h2>
-
-            <p>
-              From timeless classics to modern fades,
-              every service is tailored to you.
             </p>
-          </div>
 
-          <div className="service-list">
-            {services.map((service) => (
-              <div
-                className={`service-row ${
-                  selectedService === service.name
-                    ? "selected"
-                    : ""
-                }`}
-                key={service.number}
-                onClick={() =>
-                  setSelectedService(service.name)
-                }
-              >
-                <span className="service-number">
-                  {service.number}
-                </span>
+            <div className="hero-features">
 
-                <div className="service-main">
-                  <h3>{service.name}</h3>
-                  <p>{service.description}</p>
-                </div>
+              <div>
 
-                <div className="service-meta">
-                  <span>{service.time}</span>
-                  <strong>{service.price}</strong>
-                </div>
+                <strong>✂</strong>
 
-                <span className="service-arrow">
-                  ↗
-                </span>
+                <span>Expert<br />Barbers</span>
+
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* WORK */}
-        <section
-          className="work section"
-          id="work"
-        >
-          <div className="section-label">
-            <span>03</span>
-            SELECTED WORK
-          </div>
+              <div>
 
-          <div className="work-heading">
+                <strong>☆</strong>
+
+                <span>Premium<br />Products</span>
+
+              </div>
+
+              <div>
+
+                <strong>✓</strong>
+
+                <span>Clean &<br />Safe</span>
+
+              </div>
+
+            </div>
+
+          </motion.div>
+
+          {/* GLASS BOOKING CARD */}
+
+          <motion.div
+
+            className="booking-glass"
+
+            initial={{ opacity: 0, x: 50 }}
+
+            animate={{ opacity: 1, x: 0 }}
+
+            transition={{ duration: 0.8, delay: 0.2 }}
+
+          >
+
+            <div className="glass-top">
+
+              <p className="eyebrow">BOOK APPOINTMENT</p>
+
+              <button onClick={() => scrollTo("home")}>×</button>
+
+            </div>
+
             <h2>
-              FIND YOUR
+
+              Your Next Look
+
               <br />
-              <em>STYLE.</em>
+
+              Is Just a Click Away.
+
             </h2>
 
-            <p>
-              A selection of modern men's cuts,
-              refined for different faces and personalities.
-            </p>
-          </div>
+            <div className="glass-field">
 
-          <div className="gallery">
-            {styles.map((style, index) => (
-              <motion.article
-                className={`gallery-card card-${index}`}
-                key={style.name}
-                initial={{
-                  opacity: 0,
-                  y: 40,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                }}
-              >
-                <img
-                  src={style.image}
-                  alt={style.name}
-                />
+              <span>□</span>
 
-                <div className="gallery-overlay">
-                  <span>{style.category}</span>
+              <input
 
-                  <h3>{style.name}</h3>
+                type="date"
 
-                  <span className="gallery-arrow">
-                    ↗
-                  </span>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </section>
+                value={date}
 
-        {/* SIGNATURE STYLES */}
-        <section className="signature section-dark">
-          <div className="section-label light">
-            <span>04</span>
-            SIGNATURE STYLES
-          </div>
+                onChange={(e) => setDate(e.target.value)}
 
-          <div className="signature-content">
-            <div className="signature-item active">
-              <span>01</span>
-              <h3>THE TAPER</h3>
-              <p>
-                Clean sides. Natural finish.
-                Perfect for everyday style.
-              </p>
+              />
+
+              <b>›</b>
+
             </div>
 
-            <div className="signature-item">
-              <span>02</span>
-              <h3>SKIN FADE</h3>
-              <p>
-                Maximum contrast with
-                razor-sharp detailing.
-              </p>
+            <div className="glass-field">
+
+              <span>◷</span>
+
+              <input
+
+                type="time"
+
+                value={time}
+
+                onChange={(e) => setTime(e.target.value)}
+
+              />
+
+              <b>›</b>
+
             </div>
 
-            <div className="signature-item">
-              <span>03</span>
-              <h3>TEXTURED CROP</h3>
-              <p>
-                Contemporary texture with
-                effortless movement.
-              </p>
-            </div>
+            <button className="glass-book" onClick={() => bookAppointment()}>
 
-            <div className="signature-item">
-              <span>04</span>
-              <h3>CLASSIC</h3>
-              <p>
-                Timeless shape with
-                modern precision.
-              </p>
-            </div>
+              Book Now
+
+              <span>→</span>
+
+            </button>
+
+          </motion.div>
+
+        </div>
+
+      </section>
+
+      {/* SERVICES */}
+
+      <section id="services" className="section services-section">
+
+        <div className="section-heading">
+
+          <div>
+
+            <p className="eyebrow">OUR SERVICES</p>
+
+            <h2>Premium Grooming Services</h2>
+
           </div>
-        </section>
 
-        {/* WHY */}
-        <section className="why section">
-          <div className="section-label">
-            <span>05</span>
-            THE DIFFERENCE
+          <div className="heading-note">
+
+            <span />
+
+            Tailored for your style
+
           </div>
 
-          <div className="why-grid">
-            <h2>
-              DETAILS
-              <br />
-              <em>MATTER.</em>
-            </h2>
+        </div>
 
-            <div className="why-list">
-              <div>
-                <span>01</span>
-                <h3>PRECISION</h3>
-                <p>
-                  Every line, fade and transition
-                  is finished with intention.
-                </p>
+        <div className="services-grid">
+
+          {services.map((service, index) => (
+
+            <motion.article
+
+              className="service-card"
+
+              key={service.title}
+
+              initial={{ opacity: 0, y: 30 }}
+
+              whileInView={{ opacity: 1, y: 0 }}
+
+              viewport={{ once: true }}
+
+              transition={{ delay: index * 0.08 }}
+
+              onClick={() => setSelectedService(service.title)}
+
+            >
+
+              <div className="service-image">
+
+                <img src={service.image} alt={service.title} />
+
               </div>
 
-              <div>
-                <span>02</span>
-                <h3>PERSONAL</h3>
-                <p>
-                  Your haircut is designed around
-                  your face and individual style.
-                </p>
-              </div>
-
-              <div>
-                <span>03</span>
-                <h3>DETAIL</h3>
-                <p>
-                  Clean finishing, sharp edges
-                  and attention to the smallest details.
-                </p>
-              </div>
-
-              <div>
-                <span>04</span>
-                <h3>MODERN</h3>
-                <p>
-                  Contemporary styles without
-                  losing timeless craftsmanship.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* REVIEWS */}
-        <section
-          className="reviews section-dark"
-          id="reviews"
-        >
-          <div className="section-label light">
-            <span>06</span>
-            CLIENT REVIEWS
-          </div>
-
-          <h2>
-            HEAR IT FROM
-            <br />
-            <em>THE CLIENTS.</em>
-          </h2>
-
-          <div className="review-grid">
-            {reviews.map((review) => (
-              <article
-                className="review-card"
-                key={review.name}
-              >
-                <div className="stars">
-                  ★★★★★
-                </div>
-
-                <p>
-                  “{review.quote}”
-                </p>
-
-                <div className="review-author">
-                  <strong>{review.name}</strong>
-                  <span>{review.role}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* BOOKING */}
-        <section
-          className="booking section"
-          id="booking"
-        >
-          <div className="section-label">
-            <span>07</span>
-            BOOK YOUR CUT
-          </div>
-
-          <div className="booking-grid">
-            <div className="booking-intro">
-              <h2>
-                YOUR NEXT
-                <br />
-                CUT STARTS
-                <br />
-                <em>HERE.</em>
-              </h2>
-
-              <p>
-                Select your service, choose your preferred
-                time and send your request directly on
-                WhatsApp.
-              </p>
-
-              <div className="booking-note">
-                <span>01</span>
+              <div className="service-info">
 
                 <div>
-                  <strong>WHATSAPP BOOKING</strong>
-                  <p>
-                    Your appointment request will be
-                    sent directly to the barber.
-                  </p>
-                </div>
-              </div>
-            </div>
 
-            <form
-              className="booking-form"
-              onSubmit={handleBooking}
-            >
-              <div className="form-group">
-                <label>YOUR NAME</label>
+                  <h3>{service.title}</h3>
 
-                <input
-                  type="text"
-                  placeholder="Enter your name"
-                  value={form.name}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      name: e.target.value,
-                    })
-                  }
-                />
-              </div>
+                  <p>{service.description}</p>
 
-              <div className="form-group">
-                <label>PHONE NUMBER</label>
-
-                <input
-                  type="tel"
-                  placeholder="+91 XXXXX XXXXX"
-                  value={form.phone}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      phone: e.target.value,
-                    })
-                  }
-                />
-              </div>
-
-              <div className="form-group">
-                <label>SERVICE</label>
-
-                <select
-                  value={selectedService}
-                  onChange={(e) =>
-                    setSelectedService(e.target.value)
-                  }
-                >
-                  {services.map((service) => (
-                    <option
-                      key={service.name}
-                      value={service.name}
-                    >
-                      {service.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>DATE</label>
-
-                  <input
-                    type="date"
-                    value={form.date}
-                    onChange={(e) =>
-                      setForm({
-                        ...form,
-                        date: e.target.value,
-                      })
-                    }
-                  />
                 </div>
 
-                <div className="form-group">
-                  <label>TIME</label>
+                <div className="service-bottom">
 
-                  <input
-                    type="time"
-                    value={form.time}
-                    onChange={(e) =>
-                      setForm({
-                        ...form,
-                        time: e.target.value,
-                      })
-                    }
-                  />
+                  <strong>{service.price}</strong>
+
+                  <button>→</button>
+
                 </div>
+
               </div>
 
-              <div className="form-group">
-                <label>ANYTHING ELSE?</label>
+            </motion.article>
 
-                <textarea
-                  placeholder="Tell me anything I should know..."
-                  value={form.notes}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      notes: e.target.value,
-                    })
-                  }
-                />
-              </div>
+          ))}
 
-              <button
-                className="submit-button"
-                type="submit"
-              >
-                CONFIRM VIA WHATSAPP
-                <span>↗</span>
-              </button>
-            </form>
-          </div>
-        </section>
+        </div>
 
-        {/* LOCATION */}
-        <section className="location section-dark">
-          <div className="location-grid">
-            <div>
-              <div className="section-label light">
-                <span>08</span>
-                FIND ME
-              </div>
+      </section>
 
-              <h2>
-                COME GET
-                <br />
-                <em>SHARP.</em>
-              </h2>
-            </div>
+      {/* ABOUT */}
 
-            <div className="location-info">
-              <div>
-                <span>LOCATION</span>
-                <p>
-                  Your Salon Name
-                  <br />
-                  Your City, India
-                </p>
-              </div>
+      <section id="about" className="statement-section">
 
-              <div>
-                <span>OPENING HOURS</span>
-                <p>
-                  MON — SAT
-                  <br />
-                  10:00 AM — 9:00 PM
-                </p>
-              </div>
+        <div className="statement-image">
 
-              <div>
-                <span>CONTACT</span>
-                <p>
-                  WhatsApp
-                  <br />
-                  +91 XXXXX XXXXX
-                </p>
-              </div>
+          <img
 
-              <button className="map-button">
-                OPEN GOOGLE MAPS ↗
-              </button>
-            </div>
-          </div>
-        </section>
+            src="https://images.unsplash.com/photo-1512690459411-b9245aed614b?auto=format&fit=crop&w=1600&q=85"
 
-        {/* FINAL CTA */}
-        <section className="final-cta">
-          <div className="final-image">
-            <img
-              src={heroImage}
-              alt="Men's barber style"
-            />
-          </div>
+            alt="Barber shop"
 
-          <div className="final-overlay"></div>
+          />
 
-          <div className="final-content">
-            <span>READY FOR A CHANGE?</span>
+        </div>
 
-            <h2>
-              MAKE YOUR
-              <br />
-              <em>MOVE.</em>
-            </h2>
+        <div className="statement-content">
 
-            <button
-              className="primary-button"
-              onClick={() => scrollTo("booking")}
-            >
-              BOOK YOUR CUT
-              <span>↗</span>
-            </button>
-          </div>
-        </section>
-      </main>
+          <p className="eyebrow">THE CUT</p>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-top">
-          <div className="footer-logo">
-            THE<span>CUT</span>
-          </div>
+          <h2>
+
+            Style Is a Form
+
+            <br />
+
+            of Self Respect.
+
+          </h2>
 
           <p>
-            MEN'S HAIR ARTIST
-            <br />
-            PRECISION · STYLE · IDENTITY
+
+            We're not just cutting hair, we're building confidence.
+
+            Step in, relax, and let our experts take care of the rest.
+
           </p>
 
-          <div className="footer-links">
-            <button
-              onClick={() => scrollTo("home")}
-            >
-              HOME
-            </button>
+          <button className="outline-button" onClick={() => scrollTo("booking")}>
 
-            <button
-              onClick={() => scrollTo("services")}
-            >
-              SERVICES
-            </button>
+            Book Your Experience →
 
-            <button
-              onClick={() => scrollTo("work")}
-            >
-              WORK
-            </button>
+          </button>
 
-            <button
-              onClick={() => scrollTo("booking")}
-            >
-              BOOK
-            </button>
+        </div>
+
+      </section>
+
+      {/* GALLERY */}
+
+      <section id="gallery" className="section gallery-section">
+
+        <div className="section-heading">
+
+          <div>
+
+            <p className="eyebrow">SELECTED WORK</p>
+
+            <h2>Crafted With Precision.</h2>
+
           </div>
+
         </div>
 
-        <div className="footer-bottom">
-          <span>
-            © 2026 THE CUT. ALL RIGHTS RESERVED.
-          </span>
+        <div className="gallery-grid">
 
-          <span>
-            BUILT FOR MEN WHO CARE ABOUT THEIR STYLE.
-          </span>
+          {gallery.map((image, index) => (
+
+            <motion.div
+
+              className={`gallery-item gallery-${index + 1}`}
+
+              key={image}
+
+              initial={{ opacity: 0 }}
+
+              whileInView={{ opacity: 1 }}
+
+              viewport={{ once: true }}
+
+            >
+
+              <img src={image} alt="Barber work" />
+
+            </motion.div>
+
+          ))}
+
         </div>
+
+      </section>
+
+      {/* REVIEWS */}
+
+      <section className="section reviews-section">
+
+        <div className="reviews-title">
+
+          <p className="eyebrow">CLIENT WORDS</p>
+
+          <h2>Don't Just Take<br />Our Word For It.</h2>
+
+        </div>
+
+        <div className="reviews-grid">
+
+          {reviews.map((review) => (
+
+            <div className="review-card" key={review.name}>
+
+              <div className="stars">★★★★★</div>
+
+              <p>"{review.text}"</p>
+
+              <span>— {review.name}</span>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* BOOKING */}
+
+      <section id="booking" className="booking-section">
+
+        <div className="booking-wrapper">
+
+          <div>
+
+            <p className="eyebrow">READY FOR A CHANGE?</p>
+
+            <h2>
+
+              Your Best Look
+
+              <br />
+
+              Starts Here.
+
+            </h2>
+
+            <p>
+
+              Choose your service, select a convenient time and
+
+              we'll take care of the rest.
+
+            </p>
+
+          </div>
+
+          <form className="booking-form" onSubmit={bookAppointment}>
+
+            <label>Select Service</label>
+
+            <select
+
+              value={selectedService}
+
+              onChange={(e) => setSelectedService(e.target.value)}
+
+            >
+
+              {services.map((service) => (
+
+                <option key={service.title}>{service.title}</option>
+
+              ))}
+
+            </select>
+
+            <label>Date</label>
+
+            <input
+
+              type="date"
+
+              value={date}
+
+              onChange={(e) => setDate(e.target.value)}
+
+            />
+
+            <label>Time</label>
+
+            <input
+
+              type="time"
+
+              value={time}
+
+              onChange={(e) => setTime(e.target.value)}
+
+            />
+
+            <button type="submit">
+
+              Continue on WhatsApp →
+
+            </button>
+
+          </form>
+
+        </div>
+
+      </section>
+
+      {/* CONTACT */}
+
+      <section id="contact" className="contact-section">
+
+        <div>
+
+          <p className="eyebrow">VISIT THE CUT</p>
+
+          <h2>Good Hair.<br />Better Days.</h2>
+
+        </div>
+
+        <div className="contact-info">
+
+          <div>
+
+            <span>LOCATION</span>
+
+            <p>Your City, India</p>
+
+          </div>
+
+          <div>
+
+            <span>OPENING HOURS</span>
+
+            <p>MON — SAT · 10AM — 9PM</p>
+
+          </div>
+
+          <div>
+
+            <span>CONTACT</span>
+
+            <p>WhatsApp for appointments</p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* FOOTER */}
+
+      <footer>
+
+        <div className="footer-logo">
+
+          THE CUT
+
+          <span>MEN'S HAIR ARTIST</span>
+
+        </div>
+
+        <div className="footer-links">
+
+          <button onClick={() => scrollTo("home")}>Home</button>
+
+          <button onClick={() => scrollTo("services")}>Services</button>
+
+          <button onClick={() => scrollTo("about")}>About</button>
+
+          <button onClick={() => scrollTo("gallery")}>Gallery</button>
+
+          <button onClick={() => scrollTo("contact")}>Contact</button>
+
+        </div>
+
+        <div className="socials">
+
+          <span>◎</span>
+
+          <span>◉</span>
+
+          <span>𝕏</span>
+
+        </div>
+
       </footer>
-    </div>
+
+    </main>
+
   );
+
 }
 
 export default App;
