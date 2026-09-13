@@ -15,21 +15,18 @@ const WHATSAPP_NUMBER = "91XXXXXXXXXX";
 const services = [
   {
     title: "Haircut",
-    price: "₹399",
     description: "Precision cuts crafted for a sharp, modern look.",
     image:
       "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85",
   },
   {
     title: "Beard Trim",
-    price: "₹249",
     description: "Clean lines and perfect shape for a stronger presence.",
     image:
       "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85",
   },
   {
     title: "Hair Styling",
-    price: "₹299",
     description: "Modern styling designed around your personality.",
     image:
       "https://images.unsplash.com/photo-1599351431202-1e0f0d1a7e8e?auto=format&fit=crop&w=900&q=85",
