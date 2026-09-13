@@ -33,7 +33,9 @@ img {
   width: 100%;
 }
 
-/* NAV */
+/* =====================================================
+   NAV
+===================================================== */
 
 .navbar {
   position: absolute;
@@ -118,7 +120,9 @@ img {
   font-size: 25px;
 }
 
-/* HERO */
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero {
   min-height: 720px;
@@ -143,8 +147,18 @@ img {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(0,0,0,.94) 0%, rgba(0,0,0,.68) 40%, rgba(0,0,0,.25) 72%, rgba(0,0,0,.68) 100%),
-    linear-gradient(0deg, rgba(0,0,0,.8), transparent 40%);
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.94) 0%,
+      rgba(0,0,0,.68) 40%,
+      rgba(0,0,0,.25) 72%,
+      rgba(0,0,0,.68) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0,0,0,.8),
+      transparent 40%
+    );
 }
 
 .hero-content {
@@ -220,7 +234,9 @@ img {
   line-height: 1.4;
 }
 
-/* GLASS CARD */
+/* =====================================================
+   GLASS CARD
+===================================================== */
 
 .booking-glass {
   width: 350px;
@@ -322,7 +338,9 @@ img {
   background: white;
 }
 
-/* SECTIONS */
+/* =====================================================
+   SECTIONS
+===================================================== */
 
 .section {
   width: 91%;
@@ -361,7 +379,9 @@ img {
   background: rgba(255,255,255,.4);
 }
 
-/* SERVICES */
+/* =====================================================
+   SERVICES
+===================================================== */
 
 .services-grid {
   display: grid;
@@ -437,7 +457,9 @@ img {
   border: 1px solid rgba(255,255,255,.25);
 }
 
-/* STATEMENT */
+/* =====================================================
+   STATEMENT
+===================================================== */
 
 .statement-section {
   min-height: 560px;
@@ -477,9 +499,8 @@ img {
   position: relative;
   z-index: 2;
   width: 91%;
-  max-width: 1400px;
-  margin: auto;
   max-width: 650px;
+  margin: auto;
 }
 
 .statement-content h2 {
@@ -508,7 +529,9 @@ img {
   font-size: 11px;
 }
 
-/* GALLERY */
+/* =====================================================
+   GALLERY
+===================================================== */
 
 .gallery-grid {
   display: grid;
@@ -539,7 +562,9 @@ img {
   grid-row: span 2;
 }
 
-/* REVIEWS */
+/* =====================================================
+   REVIEWS
+===================================================== */
 
 .reviews-section {
   display: grid;
@@ -584,7 +609,9 @@ img {
   font-size: 11px;
 }
 
-/* BOOKING */
+/* =====================================================
+   BOOKING
+===================================================== */
 
 .booking-section {
   padding: 110px 4.5%;
@@ -660,7 +687,9 @@ img {
   font-weight: 600;
 }
 
-/* CONTACT */
+/* =====================================================
+   CONTACT
+===================================================== */
 
 .contact-section {
   padding: 110px 4.5%;
@@ -698,7 +727,9 @@ img {
   line-height: 1.5;
 }
 
-/* FOOTER */
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer {
   border-top: 1px solid rgba(255,255,255,.1);
@@ -720,9 +751,12 @@ footer {
   color: rgba(255,255,255,.6);
 }
 
-/* MOBILE */
+/* =====================================================
+   MAIN MOBILE
+===================================================== */
 
 @media (max-width: 900px) {
+
   .nav-links {
     display: none;
     position: absolute;
@@ -804,6 +838,7 @@ footer {
 }
 
 @media (max-width: 600px) {
+
   .navbar {
     padding: 18px 5%;
   }
@@ -932,6 +967,7 @@ footer {
     gap: 20px;
   }
 }
+
 /* =====================================================
    HAIRCUTS PAGE
 ===================================================== */
@@ -943,7 +979,9 @@ footer {
   overflow-x: hidden;
 }
 
-/* NAV */
+/* =====================================================
+   HAIRCUT NAV
+===================================================== */
 
 .haircuts-nav {
   height: 82px;
@@ -951,9 +989,10 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  background: rgba(8,8,8,0.9);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  background: rgba(8,8,8,.9);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   position: relative;
   z-index: 10;
 }
@@ -980,7 +1019,7 @@ footer {
 
 .haircuts-nav-links button,
 .haircuts-nav-links span {
-  color: rgba(255,255,255,0.72);
+  color: rgba(255,255,255,.72);
   background: transparent;
   border: 0;
   font-size: 11px;
@@ -993,15 +1032,15 @@ footer {
 }
 
 .haircuts-book {
-  border: 1px solid rgba(255,255,255,0.35);
-  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,.35);
+  background: rgba(255,255,255,.06);
   color: #fff;
   padding: 13px 18px;
   border-radius: 999px;
   font-size: 10px;
   letter-spacing: 1.2px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: .3s ease;
 }
 
 .haircuts-book:hover {
@@ -1013,7 +1052,9 @@ footer {
   margin-left: 10px;
 }
 
-/* HERO */
+/* =====================================================
+   HAIRCUT HERO
+===================================================== */
 
 .haircuts-hero {
   min-height: 570px;
@@ -1025,7 +1066,7 @@ footer {
   background:
     radial-gradient(
       circle at 75% 40%,
-      rgba(255,255,255,0.07),
+      rgba(255,255,255,.07),
       transparent 32%
     );
 }
@@ -1037,14 +1078,14 @@ footer {
 .haircuts-eyebrow {
   font-size: 10px;
   letter-spacing: 3px;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,.55);
   margin-bottom: 25px;
 }
 
 .haircuts-hero h1 {
   margin: 0;
   font-size: clamp(58px, 9vw, 125px);
-  line-height: 0.88;
+  line-height: .88;
   letter-spacing: -6px;
   font-weight: 800;
 }
@@ -1058,7 +1099,7 @@ footer {
 .haircuts-hero-text {
   max-width: 440px;
   margin-top: 38px;
-  color: rgba(255,255,255,0.56);
+  color: rgba(255,255,255,.56);
   line-height: 1.7;
   font-size: 14px;
 }
@@ -1074,7 +1115,7 @@ footer {
   display: block;
   width: 45px;
   height: 1px;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,.5);
 }
 
 .haircuts-hero-side p {
@@ -1082,10 +1123,12 @@ footer {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   line-height: 1.7;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,.55);
 }
 
-/* SELECTION */
+/* =====================================================
+   HAIRCUT SELECTION
+===================================================== */
 
 .haircut-selection {
   padding: 90px 7vw;
@@ -1101,7 +1144,7 @@ footer {
 
 .haircut-section-heading > div > span {
   display: block;
-  color: rgba(255,255,255,0.42);
+  color: rgba(255,255,255,.42);
   font-size: 10px;
   letter-spacing: 2px;
   margin-bottom: 20px;
@@ -1110,7 +1153,7 @@ footer {
 .haircut-section-heading h2 {
   margin: 0;
   font-size: clamp(42px, 6vw, 78px);
-  line-height: 0.9;
+  line-height: .9;
   letter-spacing: -3px;
 }
 
@@ -1121,12 +1164,14 @@ footer {
 
 .haircut-section-heading > p {
   max-width: 330px;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,.45);
   font-size: 13px;
   line-height: 1.7;
 }
 
-/* GRID */
+/* =====================================================
+   HAIRCUT GRID
+===================================================== */
 
 .haircut-grid {
   display: grid;
@@ -1134,73 +1179,171 @@ footer {
   gap: 24px;
 }
 
+/* =====================================================
+   PREMIUM GLASS HAIRCUT CARD
+===================================================== */
+
 .haircut-card {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  min-height: 330px;
-  background: #141414;
-  border: 1px solid rgba(255,255,255,0.08);
+  grid-template-columns: 1.05fr .95fr;
+  min-height: 380px;
+
+  border-radius: 28px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.095),
+    rgba(255,255,255,.025)
+  );
+
+  border: 1px solid rgba(255,255,255,.15);
+
   overflow: hidden;
+
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 25px 70px rgba(0,0,0,.35);
+
   transition:
-    transform 0.4s ease,
-    border-color 0.4s ease,
-    background 0.4s ease;
+    transform .4s ease,
+    border-color .4s ease,
+    background .4s ease;
 }
 
 .haircut-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(255,255,255,0.22);
+
+  border-color: rgba(255,255,255,.3);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.12),
+    rgba(255,255,255,.035)
+  );
 }
 
 .haircut-card.haircut-selected {
-  border-color: rgba(255,255,255,0.65);
-  background: #181818;
+  border-color: rgba(255,255,255,.55);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.13),
+    rgba(255,255,255,.04)
+  );
 }
+
+/* =====================================================
+   HAIRCUT PHOTO GLASS FRAME
+===================================================== */
 
 .haircut-image {
   position: relative;
-  min-height: 330px;
+
+  min-height: 360px;
+
+  margin: 10px;
+  padding: 10px;
+
   overflow: hidden;
-  background: #111;
-}
 
-.haircut-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.7s ease;
-}
+  border-radius: 22px;
 
-.haircut-card:hover .haircut-image img {
-  transform: scale(1.04);
-}
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.13),
+    rgba(255,255,255,.035)
+  );
 
-.haircut-number {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(255,255,255,0.35);
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.2);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.1),
+    0 12px 35px rgba(0,0,0,.3);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* FULL PHOTO — NO CROPPING */
+
+.haircut-image img {
+  width: 100%;
+  height: auto;
+
+  max-height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  border-radius: 15px;
+
+  display: block;
+
+  background: #111;
+
+  transition:
+    transform .7s ease,
+    filter .5s ease;
+}
+
+.haircut-card:hover .haircut-image img {
+  transform: scale(1.025);
+}
+
+/* =====================================================
+   HAIRCUT NUMBER
+===================================================== */
+
+.haircut-number {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,.35);
+
+  background: rgba(0,0,0,.35);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   font-size: 10px;
   letter-spacing: 1px;
+
+  z-index: 2;
 }
+
+/* =====================================================
+   HAIRCUT INFO
+===================================================== */
 
 .haircut-info {
   padding: 32px 28px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  min-width: 0;
 }
 
 .haircut-small {
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,.4);
   font-size: 9px;
   letter-spacing: 2px;
   margin: 0 0 17px;
@@ -1213,43 +1356,139 @@ footer {
 }
 
 .haircut-description {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,.5);
   font-size: 12px;
   line-height: 1.7;
   margin: 0;
 }
 
-.haircut-select {
-  margin-top: 30px;
+/* =====================================================
+   PRICE + SELECT ONE GLASS BOX
+===================================================== */
+
+.haircut-action-box {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: transparent;
-  color: #fff;
-  padding: 13px 15px;
+  min-height: 58px;
+
+  margin-top: 30px;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 5px;
+
+  border-radius: 17px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.105),
+    rgba(255,255,255,.025)
+  );
+
+  border: 1px solid rgba(255,255,255,.18);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 10px 30px rgba(0,0,0,.2);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* =====================================================
+   PRICE
+===================================================== */
+
+.haircut-price {
+  padding-left: 15px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: #fff;
+
+  white-space: nowrap;
+}
+
+/* =====================================================
+   SELECT BUTTON
+===================================================== */
+
+.haircut-action-box .haircut-select {
+  width: auto;
+  min-width: 122px;
+
+  height: 44px;
+
+  margin: 0;
+
+  padding: 0 16px;
+
+  border-radius: 13px;
+
+  border: 1px solid rgba(255,255,255,.2);
+
+  background: rgba(255,255,255,.055);
+
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 13px;
+
   font-size: 9px;
   letter-spacing: 2px;
-  cursor: pointer;
-  transition: 0.3s ease;
+
+  transition:
+    background .3s ease,
+    border-color .3s ease,
+    transform .25s ease;
 }
 
-.haircut-select:hover,
-.haircut-selected .haircut-select {
-  background: #fff;
-  color: #000;
+.haircut-action-box .haircut-select:hover {
+  background: rgba(255,255,255,.14);
+
+  border-color: rgba(255,255,255,.4);
+
+  transform: translateY(-1px);
 }
 
-/* SELECTED STYLE */
+.haircut-action-box .haircut-select span {
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* SELECTED */
+
+.haircut-selected .haircut-action-box {
+  border-color: rgba(255,255,255,.35);
+}
+
+.haircut-selected .haircut-action-box .haircut-select {
+  background: rgba(255,255,255,.15);
+
+  border-color: rgba(255,255,255,.35);
+}
+
+/* =====================================================
+   SELECTED STYLE BAR
+===================================================== */
 
 .selected-style-bar {
   padding: 28px 7vw;
+
   background: #fff;
   color: #000;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   gap: 30px;
 }
 
@@ -1262,7 +1501,7 @@ footer {
 .selected-style-bar span {
   font-size: 9px;
   letter-spacing: 2px;
-  opacity: 0.5;
+  opacity: .5;
 }
 
 .selected-style-bar strong {
@@ -1274,9 +1513,12 @@ footer {
   border: 1px solid #000;
   background: #000;
   color: #fff;
+
   padding: 14px 22px;
+
   font-size: 9px;
   letter-spacing: 1.5px;
+
   cursor: pointer;
 }
 
@@ -1285,27 +1527,35 @@ footer {
   margin-left: 15px;
 }
 
-/* BOTTOM CTA */
+/* =====================================================
+   BOTTOM CTA
+===================================================== */
 
 .haircuts-bottom {
   padding: 110px 7vw;
+
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+
   min-height: 450px;
+
   background: #080808;
 }
 
 .haircuts-bottom > div > span {
   font-size: 9px;
   letter-spacing: 3px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,.4);
 }
 
 .haircuts-bottom h2 {
   margin: 22px 0 0;
+
   font-size: clamp(50px, 7vw, 90px);
-  line-height: 0.9;
+
+  line-height: .9;
+
   letter-spacing: -4px;
 }
 
@@ -1317,12 +1567,17 @@ footer {
 .haircuts-bottom button {
   background: #fff;
   color: #000;
+
   border: 0;
+
   padding: 18px 28px;
+
   font-size: 10px;
   letter-spacing: 1.8px;
+
   cursor: pointer;
-  transition: 0.3s ease;
+
+  transition: .3s ease;
 }
 
 .haircuts-bottom button:hover {
@@ -1333,14 +1588,19 @@ footer {
   margin-left: 20px;
 }
 
-/* FOOTER */
+/* =====================================================
+   HAIRCUT FOOTER
+===================================================== */
 
 .haircuts-footer {
   padding: 30px 7vw;
-  border-top: 1px solid rgba(255,255,255,0.1);
+
+  border-top: 1px solid rgba(255,255,255,.1);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   gap: 30px;
 }
 
@@ -1354,22 +1614,32 @@ footer {
 }
 
 .haircuts-footer p {
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,.4);
+
   font-size: 8px;
+
   line-height: 1.8;
+
   letter-spacing: 1.5px;
 }
 
 .haircuts-footer button {
   background: transparent;
+
   border: 0;
-  color: rgba(255,255,255,0.6);
+
+  color: rgba(255,255,255,.6);
+
   font-size: 9px;
+
   letter-spacing: 1.5px;
+
   cursor: pointer;
 }
 
-/* MOBILE */
+/* =====================================================
+   HAIRCUT MOBILE
+===================================================== */
 
 @media (max-width: 800px) {
 
@@ -1393,12 +1663,15 @@ footer {
 
   .haircuts-hero {
     min-height: 540px;
+
     padding: 80px 22px 60px;
+
     display: block;
   }
 
   .haircuts-hero h1 {
     font-size: clamp(55px, 17vw, 90px);
+
     letter-spacing: -4px;
   }
 
@@ -1408,7 +1681,9 @@ footer {
 
   .haircuts-hero-text {
     font-size: 13px;
+
     margin-top: 30px;
+
     max-width: 330px;
   }
 
@@ -1422,32 +1697,90 @@ footer {
 
   .haircut-section-heading {
     display: block;
+
     margin-bottom: 40px;
   }
 
   .haircut-section-heading h2 {
     font-size: 48px;
+
     letter-spacing: -2px;
   }
 
   .haircut-section-heading > p {
     margin-top: 25px;
+
     font-size: 12px;
   }
 
   .haircut-grid {
     grid-template-columns: 1fr;
+
     gap: 18px;
   }
 
+  /* MOBILE GLASS CARD */
+
   .haircut-card {
-    grid-template-columns: 1fr;
+    display: block;
+
     min-height: auto;
+
+    border-radius: 23px;
   }
 
+  /* MOBILE PHOTO FRAME */
+
   .haircut-image {
-    height: 330px;
-    min-height: 330px;
+    width: calc(100% - 18px);
+
+    height: auto;
+
+    min-height: 0;
+
+    margin: 9px;
+
+    padding: 10px;
+
+    border-radius: 19px;
+
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,.13),
+      rgba(255,255,255,.035)
+    );
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    display: block;
+  }
+
+  /* FULL PHOTO ON MOBILE */
+
+  .haircut-image img {
+    width: 100%;
+
+    height: auto;
+
+    min-height: 0;
+
+    max-height: none;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    border-radius: 13px;
+
+    background: #111;
+  }
+
+  .haircut-number {
+    top: 20px;
+    left: 20px;
+
+    width: 38px;
+    height: 38px;
   }
 
   .haircut-info {
@@ -1462,164 +1795,75 @@ footer {
     max-width: 320px;
   }
 
-  .haircut-select {
-    margin-top: 25px;
-  }
-
-  .selected-style-bar {
-    padding: 22px 20px;
-    display: block;
-  }
-
-  .selected-style-bar button {
-    width: 100%;
-    margin-top: 18px;
-  }
-
-  .haircuts-bottom {
-    padding: 80px 20px;
-    min-height: 430px;
-    display: block;
-  }
-
-  .haircuts-bottom h2 {
-    font-size: 55px;
-    letter-spacing: -3px;
-  }
-
-  .haircuts-bottom button {
-    margin-top: 45px;
-    width: 100%;
-  }
-
-  .haircuts-footer {
-    padding: 28px 20px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .haircuts-footer p {
-    order: 3;
-  }
-}
-/* =========================================
-   HAIRCUT PRICE + SELECT GLASS BOX
-========================================= */
-
-.haircut-action-box {
-  width: 100%;
-  min-height: 54px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 5px;
-
-  border-radius: 16px;
-
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.09),
-    rgba(255,255,255,0.025)
-  );
-
-  border: 1px solid rgba(255,255,255,0.16);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.08),
-    0 10px 30px rgba(0,0,0,0.22);
-}
-
-
-/* PRICE */
-
-.haircut-price {
-  padding-left: 15px;
-
-  font-size: 16px;
-  font-weight: 500;
-
-  color: #fff;
-}
-
-
-/* SELECT BUTTON */
-
-.haircut-action-box .haircut-select {
-  width: auto;
-  min-width: 125px;
-
-  margin-top: 0;
-
-  height: 42px;
-
-  padding: 0 15px;
-
-  border-radius: 12px;
-
-  border: 1px solid rgba(255,255,255,0.22);
-
-  background: rgba(255,255,255,0.055);
-
-  color: #fff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 15px;
-
-  font-size: 9px;
-  letter-spacing: 2px;
-
-  transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    transform 0.25s ease;
-}
-
-.haircut-action-box .haircut-select:hover {
-  background: rgba(255,255,255,0.14);
-
-  border-color: rgba(255,255,255,0.4);
-
-  transform: translateY(-1px);
-}
-
-
-/* SELECTED */
-
-.haircut-selected .haircut-action-box {
-  border-color: rgba(255,255,255,0.35);
-}
-
-.haircut-selected .haircut-action-box .haircut-select {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.35);
-}
-
-
-/* MOBILE */
-
-@media (max-width: 800px) {
+  /* PRICE + SELECT GLASS BOX MOBILE */
 
   .haircut-action-box {
     min-height: 52px;
+
+    margin-top: 25px;
+
     border-radius: 15px;
+
+    padding: 5px;
   }
 
   .haircut-price {
     padding-left: 13px;
+
     font-size: 15px;
   }
 
   .haircut-action-box .haircut-select {
     min-width: 115px;
+
     height: 40px;
+
     border-radius: 11px;
+
+    gap: 10px;
+  }
+
+  .selected-style-bar {
+    padding: 22px 20px;
+
+    display: block;
+  }
+
+  .selected-style-bar button {
+    width: 100%;
+
+    margin-top: 18px;
+  }
+
+  .haircuts-bottom {
+    padding: 80px 20px;
+
+    min-height: 430px;
+
+    display: block;
+  }
+
+  .haircuts-bottom h2 {
+    font-size: 55px;
+
+    letter-spacing: -3px;
+  }
+
+  .haircuts-bottom button {
+    margin-top: 45px;
+
+    width: 100%;
+  }
+
+  .haircuts-footer {
+    padding: 28px 20px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .haircuts-footer p {
+    order: 3;
   }
 }
