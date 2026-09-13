@@ -458,6 +458,235 @@ img {
 }
 
 /* =====================================================
+   SERVICE MODAL
+===================================================== */
+
+.service-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,255,255,.055),
+      transparent 35%
+    ),
+    rgba(0,0,0,.76);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.service-modal {
+  position: relative;
+  width: min(520px, 100%);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 28px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.105),
+      rgba(255,255,255,.025)
+    ),
+    #0b0b0b;
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.7),
+    inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.service-modal-close {
+  position: absolute;
+  top: 17px;
+  right: 17px;
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.42);
+  color: rgba(255,255,255,.75);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transition: .25s;
+}
+
+.service-modal-close:hover {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.service-modal-image {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+}
+
+.service-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+.service-modal-image-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.05),
+      rgba(0,0,0,.72)
+    );
+}
+
+.service-modal-icon {
+  position: absolute;
+  left: 25px;
+  bottom: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 15px;
+}
+
+.service-modal-content {
+  padding: 28px 30px 30px;
+}
+
+.service-modal-kicker {
+  margin-bottom: 12px;
+  color: rgba(255,255,255,.4);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.service-modal-title {
+  font-family: "Manrope", sans-serif;
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -1.8px;
+}
+
+.service-modal-description {
+  margin-top: 16px;
+  max-width: 440px;
+  color: rgba(255,255,255,.52);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.service-modal-meta {
+  margin-top: 24px;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 17px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 15px;
+  background: rgba(255,255,255,.035);
+}
+
+.service-modal-meta span {
+  color: rgba(255,255,255,.38);
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+.service-modal-meta strong {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.service-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.service-modal-primary,
+.service-modal-secondary {
+  min-height: 55px;
+  border-radius: 15px;
+  font-size: 9px;
+  letter-spacing: 1.7px;
+  font-weight: 700;
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    border-color .25s ease;
+}
+
+.service-modal-primary {
+  flex: 1;
+  border: 1px solid rgba(255,255,255,.65);
+  background: linear-gradient(
+    110deg,
+    #fff,
+    #cfcfcf
+  );
+  color: #080808;
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.28);
+}
+
+.service-modal-primary:hover {
+  transform: translateY(-2px);
+  background: #fff;
+}
+
+.service-modal-primary span {
+  margin-left: 22px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.service-modal-secondary {
+  flex: 1;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.045);
+  color: #fff;
+}
+
+.service-modal-secondary:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.4);
+  background: rgba(255,255,255,.09);
+}
+
+.service-modal-secondary span {
+  margin-left: 16px;
+  font-size: 12px;
+}
+
+.service-modal-note {
+  margin-top: 14px;
+  text-align: center;
+  color: rgba(255,255,255,.25);
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+/* =====================================================
    STATEMENT
 ===================================================== */
 
@@ -793,8 +1022,6 @@ img {
   );
 }
 
-/* FORM HEADER */
-
 .booking-form-header {
   display: flex;
   align-items: flex-start;
@@ -843,8 +1070,6 @@ img {
   margin: 24px 0;
   background: rgba(255,255,255,.09);
 }
-
-/* FORM FIELDS */
 
 .booking-field-group {
   margin-bottom: 17px;
@@ -1330,6 +1555,85 @@ footer {
   }
 
   /* =====================================================
+     SERVICE MODAL MOBILE
+  ===================================================== */
+
+  .service-modal-backdrop {
+    padding: 15px;
+  }
+
+  .service-modal {
+    width: 100%;
+    max-width: 430px;
+    border-radius: 23px;
+  }
+
+  .service-modal-close {
+    top: 12px;
+    right: 12px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+
+  .service-modal-image {
+    height: 165px;
+  }
+
+  .service-modal-icon {
+    left: 18px;
+    bottom: 16px;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+
+  .service-modal-content {
+    padding: 22px 20px 22px;
+  }
+
+  .service-modal-title {
+    font-size: 31px;
+    letter-spacing: -1.3px;
+  }
+
+  .service-modal-description {
+    font-size: 11px;
+    margin-top: 13px;
+  }
+
+  .service-modal-meta {
+    margin-top: 18px;
+    min-height: 53px;
+    padding: 0 14px;
+  }
+
+  .service-modal-meta strong {
+    font-size: 15px;
+  }
+
+  .service-modal-actions {
+    margin-top: 11px;
+    gap: 8px;
+  }
+
+  .service-modal-primary,
+  .service-modal-secondary {
+    min-height: 51px;
+    border-radius: 13px;
+    font-size: 8px;
+    letter-spacing: 1.3px;
+  }
+
+  .service-modal-primary span {
+    margin-left: 12px;
+  }
+
+  .service-modal-secondary span {
+    margin-left: 9px;
+  }
+
+  /* =====================================================
      PREMIUM BOOKING MOBILE
   ===================================================== */
 
@@ -1763,8 +2067,6 @@ footer {
   justify-content: center;
 }
 
-/* FULL PHOTO — NO CROPPING */
-
 .haircut-image img {
   width: 100%;
   height: auto;
@@ -1782,10 +2084,6 @@ footer {
 .haircut-card:hover .haircut-image img {
   transform: scale(1.025);
 }
-
-/* =====================================================
-   HAIRCUT NUMBER
-===================================================== */
 
 .haircut-number {
   position: absolute;
@@ -1837,10 +2135,6 @@ footer {
   line-height: 1.7;
   margin: 0;
 }
-
-/* =====================================================
-   PRICE + SELECT ONE GLASS BOX
-===================================================== */
 
 .haircut-action-box {
   width: 100%;
