@@ -139,6 +139,10 @@ function App() {
 
   const [selectedHaircut, setSelectedHaircut] = useState("");
 
+  const selectedHaircutData = haircutStyles.find(
+    (style) => style.name === selectedHaircut
+  );
+
   const scrollTo = (id: string) => {
     setCurrentPage("home");
 
@@ -608,99 +612,269 @@ function App() {
         </div>
       </section>
 
+      {/* =====================================================
+          PREMIUM BOOKING SECTION
+      ===================================================== */}
+
       <section
         id="booking"
         className="booking-section"
       >
         <div className="booking-wrapper">
-          <div>
-            <p className="eyebrow">
-              READY FOR A CHANGE?
-            </p>
+
+          <motion.div
+            className="booking-copy"
+            initial={{
+              opacity: 0,
+              x: -30,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.7,
+            }}
+          >
+            <div className="booking-copy-top">
+              <span className="booking-index">
+                01
+              </span>
+
+              <p className="eyebrow">
+                READY FOR A CHANGE?
+              </p>
+            </div>
 
             <h2>
               Your Best Look
               <br />
-              Starts Here.
+              <em>Starts Here.</em>
             </h2>
 
-            <p>
-              Choose your service, select a
-              convenient time and we'll take
-              care of the rest.
+            <p className="booking-description">
+              Choose your service, select your
+              preferred date and time, and send
+              your request directly to us on
+              WhatsApp.
             </p>
-          </div>
 
-          <form
+            <div className="booking-steps">
+
+              <div className="booking-step">
+                <span>01</span>
+                <div>
+                  <strong>
+                    Choose your service
+                  </strong>
+                  <p>
+                    Pick the grooming experience
+                    that suits you.
+                  </p>
+                </div>
+              </div>
+
+              <div className="booking-step">
+                <span>02</span>
+                <div>
+                  <strong>
+                    Select your time
+                  </strong>
+                  <p>
+                    Choose a date and convenient
+                    appointment time.
+                  </p>
+                </div>
+              </div>
+
+              <div className="booking-step">
+                <span>03</span>
+                <div>
+                  <strong>
+                    Confirm on WhatsApp
+                  </strong>
+                  <p>
+                    We'll confirm your appointment
+                    personally.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </motion.div>
+
+          <motion.form
             className="booking-form"
             onSubmit={bookAppointment}
+            initial={{
+              opacity: 0,
+              x: 30,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.7,
+              delay: 0.1,
+            }}
           >
-            <label>Select Service</label>
 
-            <select
-              value={selectedService}
-              onChange={(e) =>
-                setSelectedService(
-                  e.target.value
-                )
-              }
-            >
-              {services.map((service) => (
-                <option
-                  key={service.title}
+            <div className="booking-form-header">
+              <div>
+                <span>
+                  APPOINTMENT REQUEST
+                </span>
+
+                <h3>
+                  Book your visit
+                </h3>
+              </div>
+
+              <div className="booking-status">
+                <span />
+                WHATSAPP
+              </div>
+            </div>
+
+            <div className="booking-form-divider" />
+
+            <div className="booking-field-group">
+              <label>
+                SELECT SERVICE
+              </label>
+
+              <div className="booking-input-shell">
+                <span className="booking-field-icon">
+                  ◇
+                </span>
+
+                <select
+                  value={selectedService}
+                  onChange={(e) =>
+                    setSelectedService(
+                      e.target.value
+                    )
+                  }
                 >
-                  {service.title}
-                </option>
-              ))}
-            </select>
+                  {services.map((service) => (
+                    <option
+                      key={service.title}
+                    >
+                      {service.title}
+                    </option>
+                  ))}
+                </select>
+
+                <span className="booking-field-arrow">
+                  ↓
+                </span>
+              </div>
+            </div>
 
             {selectedHaircut && (
-              <>
+              <div className="booking-field-group">
                 <label>
-                  Selected Haircut
+                  SELECTED HAIRCUT
                 </label>
 
-                <div
-                  className="selected-haircut-input"
-                  style={{
-                    padding: "14px 16px",
-                    border:
-                      "1px solid rgba(255,255,255,0.15)",
-                    background:
-                      "rgba(255,255,255,0.04)",
-                    color: "#fff",
-                    marginBottom: "18px",
-                  }}
-                >
-                  {selectedHaircut}
+                <div className="selected-haircut-card">
+
+                  <div className="selected-haircut-icon">
+                    ✦
+                  </div>
+
+                  <div className="selected-haircut-info">
+                    <strong>
+                      {selectedHaircut}
+                    </strong>
+
+                    <span>
+                      HAIRCUT STYLE
+                    </span>
+                  </div>
+
+                  <strong className="selected-haircut-price">
+                    {selectedHaircutData?.price}
+                  </strong>
+
                 </div>
-              </>
+              </div>
             )}
 
-            <label>Date</label>
+            <div className="booking-field-group">
+              <label>
+                PREFERRED DATE
+              </label>
 
-            <input
-              type="date"
-              value={date}
-              onChange={(e) =>
-                setDate(e.target.value)
-              }
-            />
+              <div className="booking-input-shell">
+                <span className="booking-field-icon">
+                  □
+                </span>
 
-            <label>Time</label>
+                <input
+                  type="date"
+                  value={date}
+                  onChange={(e) =>
+                    setDate(e.target.value)
+                  }
+                />
 
-            <input
-              type="time"
-              value={time}
-              onChange={(e) =>
-                setTime(e.target.value)
-              }
-            />
+                <span className="booking-field-arrow">
+                  →
+                </span>
+              </div>
+            </div>
 
-            <button type="submit">
-              Continue on WhatsApp →
+            <div className="booking-field-group">
+              <label>
+                PREFERRED TIME
+              </label>
+
+              <div className="booking-input-shell">
+                <span className="booking-field-icon">
+                  ◷
+                </span>
+
+                <input
+                  type="time"
+                  value={time}
+                  onChange={(e) =>
+                    setTime(e.target.value)
+                  }
+                />
+
+                <span className="booking-field-arrow">
+                  →
+                </span>
+              </div>
+            </div>
+
+            <button
+              className="booking-submit"
+              type="submit"
+            >
+              <span>
+                CONTINUE ON WHATSAPP
+              </span>
+
+              <strong>
+                →
+              </strong>
             </button>
-          </form>
+
+            <p className="booking-form-note">
+              Your appointment request will open
+              directly in WhatsApp.
+            </p>
+
+          </motion.form>
         </div>
       </section>
 
@@ -950,8 +1124,6 @@ function HaircutsPage({
                   <p className="haircut-description">
                     {style.description}
                   </p>
-
-                  {/* PRICE + SELECT GLASS BOX */}
 
                   <div className="haircut-action-box">
 
