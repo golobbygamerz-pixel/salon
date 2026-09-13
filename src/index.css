@@ -235,7 +235,7 @@ img {
 }
 
 /* =====================================================
-   GLASS CARD
+   HERO GLASS CARD
 ===================================================== */
 
 .booking-glass {
@@ -610,81 +610,456 @@ img {
 }
 
 /* =====================================================
-   BOOKING
+   PREMIUM BOOKING SECTION
 ===================================================== */
 
 .booking-section {
-  padding: 110px 4.5%;
-  background: #0b0b0b;
+  position: relative;
+  padding: 130px 4.5%;
+  background:
+    radial-gradient(
+      circle at 15% 45%,
+      rgba(255,255,255,.045),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 50%,
+      rgba(255,255,255,.035),
+      transparent 30%
+    ),
+    #080808;
+  overflow: hidden;
+}
+
+.booking-section::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  right: -180px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: rgba(255,255,255,.025);
+  filter: blur(70px);
+  pointer-events: none;
 }
 
 .booking-wrapper {
-  max-width: 1200px;
+  position: relative;
+  z-index: 2;
+  max-width: 1250px;
   margin: auto;
   display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 100px;
+  grid-template-columns: minmax(0, 1fr) 470px;
+  gap: 90px;
   align-items: center;
 }
 
-.booking-wrapper h2 {
+/* =====================================================
+   BOOKING LEFT CONTENT
+===================================================== */
+
+.booking-copy {
+  min-width: 0;
+}
+
+.booking-copy-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.booking-copy-top .eyebrow {
+  margin: 0;
+}
+
+.booking-index {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.035);
+  color: rgba(255,255,255,.55);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.booking-copy h2 {
   font-family: "Manrope", sans-serif;
-  font-size: clamp(45px, 5vw, 70px);
-  line-height: .98;
-  letter-spacing: -3px;
+  font-size: clamp(50px, 6vw, 78px);
+  line-height: .93;
+  letter-spacing: -4px;
   font-weight: 500;
 }
 
-.booking-wrapper > div > p:last-child {
-  margin-top: 25px;
-  max-width: 450px;
-  color: rgba(255,255,255,.5);
-  line-height: 1.7;
+.booking-copy h2 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -3px;
+}
+
+.booking-description {
+  margin-top: 30px;
+  max-width: 500px;
+  color: rgba(255,255,255,.48);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* =====================================================
+   BOOKING STEPS
+===================================================== */
+
+.booking-steps {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.booking-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.booking-step > span {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.42);
+  font-size: 8px;
+}
+
+.booking-step strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .2px;
+}
+
+.booking-step p {
+  margin-top: 5px;
+  color: rgba(255,255,255,.34);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   BOOKING GLASS FORM
+===================================================== */
+
+.booking-form {
+  position: relative;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 28px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.095),
+      rgba(255,255,255,.025)
+    );
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.1),
+    inset 0 -1px 0 rgba(255,255,255,.025);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.booking-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.3),
+    transparent
+  );
+}
+
+/* FORM HEADER */
+
+.booking-form-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.booking-form-header > div:first-child > span {
+  display: block;
+  color: rgba(255,255,255,.38);
+  font-size: 8px;
+  letter-spacing: 2px;
+  margin-bottom: 9px;
+}
+
+.booking-form-header h3 {
+  font-family: "Manrope", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -.7px;
+}
+
+.booking-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  color: rgba(255,255,255,.42);
+  font-size: 7px;
+  letter-spacing: 1.3px;
+  white-space: nowrap;
+}
+
+.booking-status > span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.8);
+  box-shadow: 0 0 10px rgba(255,255,255,.4);
+}
+
+.booking-form-divider {
+  height: 1px;
+  margin: 24px 0;
+  background: rgba(255,255,255,.09);
+}
+
+/* FORM FIELDS */
+
+.booking-field-group {
+  margin-bottom: 17px;
+}
+
+.booking-field-group > label {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(255,255,255,.4);
+  font-size: 8px;
+  letter-spacing: 1.8px;
+  font-weight: 600;
+}
+
+.booking-input-shell {
+  position: relative;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 15px;
+  background: rgba(0,0,0,.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035);
+  transition:
+    border-color .3s ease,
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
+.booking-input-shell:focus-within {
+  border-color: rgba(255,255,255,.38);
+  background: rgba(255,255,255,.045);
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.025),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.booking-field-icon {
+  width: 45px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.43);
   font-size: 13px;
 }
 
-.booking-form {
-  padding: 30px;
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 20px;
-  background: rgba(255,255,255,.025);
+.booking-input-shell select,
+.booking-input-shell input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: white;
+  font-size: 11px;
 }
 
-.booking-form label {
-  display: block;
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.45);
-  margin-bottom: 8px;
+.booking-input-shell select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 35px;
+  cursor: pointer;
 }
 
-.booking-form input,
-.booking-form select {
-  width: 100%;
-  height: 48px;
-  margin-bottom: 18px;
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 8px;
-  padding: 0 14px;
+.booking-input-shell select option {
   background: #111;
   color: white;
-  outline: none;
 }
 
-.booking-form input::-webkit-calendar-picker-indicator {
-  filter: invert(1);
+.booking-input-shell input {
+  color-scheme: dark;
 }
 
-.booking-form button {
-  width: 100%;
-  height: 50px;
-  border: 0;
-  border-radius: 8px;
-  background: white;
-  color: #111;
+.booking-input-shell input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 45px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.booking-field-arrow {
+  width: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.35);
+  font-size: 13px;
+}
+
+/* =====================================================
+   SELECTED HAIRCUT
+===================================================== */
+
+.selected-haircut-card {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 9px 12px;
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,.2);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.08),
+      rgba(255,255,255,.025)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.selected-haircut-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.055);
+  color: rgba(255,255,255,.75);
+  font-size: 13px;
+}
+
+.selected-haircut-info {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.selected-haircut-info strong {
   font-size: 12px;
+  font-weight: 500;
+}
+
+.selected-haircut-info span {
+  color: rgba(255,255,255,.34);
+  font-size: 7px;
+  letter-spacing: 1.5px;
+}
+
+.selected-haircut-price {
+  padding: 0 5px;
+  font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
+}
+
+/* =====================================================
+   BOOKING SUBMIT
+===================================================== */
+
+.booking-submit {
+  width: 100%;
+  height: 57px;
+  margin-top: 7px;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 16px;
+  background: linear-gradient(
+    110deg,
+    #ffffff,
+    #cfcfcf
+  );
+  color: #080808;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 19px 0 22px;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  font-weight: 700;
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.8);
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
+.booking-submit strong {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.09);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.booking-submit:hover {
+  transform: translateY(-3px);
+  background: #fff;
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+.booking-form-note {
+  margin-top: 13px;
+  text-align: center;
+  color: rgba(255,255,255,.28);
+  font-size: 8px;
+  line-height: 1.5;
 }
 
 /* =====================================================
@@ -825,7 +1200,17 @@ footer {
 
   .booking-wrapper {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 60px;
+  }
+
+  .booking-copy {
+    max-width: 650px;
+  }
+
+  .booking-form {
+    width: 100%;
+    max-width: 520px;
+    justify-self: center;
   }
 
   .contact-section {
@@ -836,6 +1221,10 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media (max-width: 600px) {
 
@@ -940,12 +1329,134 @@ footer {
     font-size: 40px;
   }
 
+  /* =====================================================
+     PREMIUM BOOKING MOBILE
+  ===================================================== */
+
   .booking-section {
-    padding: 80px 5%;
+    padding: 85px 5%;
+  }
+
+  .booking-wrapper {
+    gap: 45px;
+  }
+
+  .booking-copy-top {
+    gap: 13px;
+    margin-bottom: 22px;
+  }
+
+  .booking-index {
+    width: 32px;
+    height: 32px;
+    font-size: 8px;
+  }
+
+  .booking-copy h2 {
+    font-size: clamp(46px, 13vw, 64px);
+    letter-spacing: -3px;
+  }
+
+  .booking-copy h2 em {
+    letter-spacing: -2px;
+  }
+
+  .booking-description {
+    margin-top: 24px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .booking-steps {
+    margin-top: 35px;
+    gap: 15px;
+  }
+
+  .booking-step {
+    gap: 13px;
+  }
+
+  .booking-step > span {
+    width: 25px;
+    height: 25px;
+    font-size: 7px;
+  }
+
+  .booking-step strong {
+    font-size: 10px;
+  }
+
+  .booking-step p {
+    font-size: 9px;
   }
 
   .booking-form {
     padding: 22px;
+    border-radius: 23px;
+  }
+
+  .booking-form-header h3 {
+    font-size: 21px;
+  }
+
+  .booking-status {
+    padding: 7px 8px;
+    font-size: 6px;
+  }
+
+  .booking-form-divider {
+    margin: 20px 0;
+  }
+
+  .booking-input-shell {
+    height: 53px;
+    border-radius: 14px;
+  }
+
+  .booking-field-icon {
+    width: 40px;
+  }
+
+  .booking-field-arrow {
+    width: 38px;
+  }
+
+  .booking-input-shell select,
+  .booking-input-shell input {
+    font-size: 10px;
+  }
+
+  .selected-haircut-card {
+    min-height: 60px;
+  }
+
+  .selected-haircut-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .booking-submit {
+    height: 55px;
+    border-radius: 14px;
+    padding-left: 18px;
+    font-size: 8px;
+  }
+
+  .booking-submit strong {
+    width: 30px;
+    height: 30px;
+  }
+
+  .booking-form-note {
+    font-size: 7px;
+  }
+
+  .booking-section + .contact-section {
+    padding-top: 80px;
+  }
+
+  .booking-form {
+    max-width: none;
   }
 
   .contact-section {
@@ -1187,26 +1698,19 @@ footer {
   display: grid;
   grid-template-columns: 1.05fr .95fr;
   min-height: 380px;
-
   border-radius: 28px;
-
   background: linear-gradient(
     135deg,
     rgba(255,255,255,.095),
     rgba(255,255,255,.025)
   );
-
   border: 1px solid rgba(255,255,255,.15);
-
   overflow: hidden;
-
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.08),
     0 25px 70px rgba(0,0,0,.35);
-
   transition:
     transform .4s ease,
     border-color .4s ease,
@@ -1215,9 +1719,7 @@ footer {
 
 .haircut-card:hover {
   transform: translateY(-5px);
-
   border-color: rgba(255,255,255,.3);
-
   background: linear-gradient(
     135deg,
     rgba(255,255,255,.12),
@@ -1227,7 +1729,6 @@ footer {
 
 .haircut-card.haircut-selected {
   border-color: rgba(255,255,255,.55);
-
   background: linear-gradient(
     135deg,
     rgba(255,255,255,.13),
@@ -1241,31 +1742,22 @@ footer {
 
 .haircut-image {
   position: relative;
-
   min-height: 360px;
-
   margin: 10px;
   padding: 10px;
-
   overflow: hidden;
-
   border-radius: 22px;
-
   background: linear-gradient(
     135deg,
     rgba(255,255,255,.13),
     rgba(255,255,255,.035)
   );
-
   border: 1px solid rgba(255,255,255,.2);
-
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.1),
     0 12px 35px rgba(0,0,0,.3);
-
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1276,18 +1768,12 @@ footer {
 .haircut-image img {
   width: 100%;
   height: auto;
-
   max-height: 100%;
-
   object-fit: contain;
   object-position: center;
-
   border-radius: 15px;
-
   display: block;
-
   background: #111;
-
   transition:
     transform .7s ease,
     filter .5s ease;
@@ -1305,26 +1791,18 @@ footer {
   position: absolute;
   top: 22px;
   left: 22px;
-
   width: 40px;
   height: 40px;
-
   border-radius: 50%;
-
   border: 1px solid rgba(255,255,255,.35);
-
   background: rgba(0,0,0,.35);
-
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 10px;
   letter-spacing: 1px;
-
   z-index: 2;
 }
 
@@ -1334,11 +1812,9 @@ footer {
 
 .haircut-info {
   padding: 32px 28px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   min-width: 0;
 }
 
@@ -1369,81 +1845,50 @@ footer {
 .haircut-action-box {
   width: 100%;
   min-height: 58px;
-
   margin-top: 30px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   gap: 10px;
-
   padding: 5px;
-
   border-radius: 17px;
-
   background: linear-gradient(
     135deg,
     rgba(255,255,255,.105),
     rgba(255,255,255,.025)
   );
-
   border: 1px solid rgba(255,255,255,.18);
-
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.08),
     0 10px 30px rgba(0,0,0,.2);
-
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
 
-/* =====================================================
-   PRICE
-===================================================== */
-
 .haircut-price {
   padding-left: 15px;
-
   font-size: 16px;
   font-weight: 600;
-
   color: #fff;
-
   white-space: nowrap;
 }
-
-/* =====================================================
-   SELECT BUTTON
-===================================================== */
 
 .haircut-action-box .haircut-select {
   width: auto;
   min-width: 122px;
-
   height: 44px;
-
   margin: 0;
-
   padding: 0 16px;
-
   border-radius: 13px;
-
   border: 1px solid rgba(255,255,255,.2);
-
   background: rgba(255,255,255,.055);
-
   color: #fff;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   gap: 13px;
-
   font-size: 9px;
   letter-spacing: 2px;
-
   transition:
     background .3s ease,
     border-color .3s ease,
@@ -1452,9 +1897,7 @@ footer {
 
 .haircut-action-box .haircut-select:hover {
   background: rgba(255,255,255,.14);
-
   border-color: rgba(255,255,255,.4);
-
   transform: translateY(-1px);
 }
 
@@ -1463,15 +1906,12 @@ footer {
   line-height: 1;
 }
 
-/* SELECTED */
-
 .haircut-selected .haircut-action-box {
   border-color: rgba(255,255,255,.35);
 }
 
 .haircut-selected .haircut-action-box .haircut-select {
   background: rgba(255,255,255,.15);
-
   border-color: rgba(255,255,255,.35);
 }
 
@@ -1481,14 +1921,11 @@ footer {
 
 .selected-style-bar {
   padding: 28px 7vw;
-
   background: #fff;
   color: #000;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   gap: 30px;
 }
 
@@ -1513,12 +1950,9 @@ footer {
   border: 1px solid #000;
   background: #000;
   color: #fff;
-
   padding: 14px 22px;
-
   font-size: 9px;
   letter-spacing: 1.5px;
-
   cursor: pointer;
 }
 
@@ -1533,13 +1967,10 @@ footer {
 
 .haircuts-bottom {
   padding: 110px 7vw;
-
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-
   min-height: 450px;
-
   background: #080808;
 }
 
@@ -1551,11 +1982,8 @@ footer {
 
 .haircuts-bottom h2 {
   margin: 22px 0 0;
-
   font-size: clamp(50px, 7vw, 90px);
-
   line-height: .9;
-
   letter-spacing: -4px;
 }
 
@@ -1567,16 +1995,11 @@ footer {
 .haircuts-bottom button {
   background: #fff;
   color: #000;
-
   border: 0;
-
   padding: 18px 28px;
-
   font-size: 10px;
   letter-spacing: 1.8px;
-
   cursor: pointer;
-
   transition: .3s ease;
 }
 
@@ -1594,13 +2017,10 @@ footer {
 
 .haircuts-footer {
   padding: 30px 7vw;
-
   border-top: 1px solid rgba(255,255,255,.1);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   gap: 30px;
 }
 
@@ -1615,25 +2035,17 @@ footer {
 
 .haircuts-footer p {
   color: rgba(255,255,255,.4);
-
   font-size: 8px;
-
   line-height: 1.8;
-
   letter-spacing: 1.5px;
 }
 
 .haircuts-footer button {
   background: transparent;
-
   border: 0;
-
   color: rgba(255,255,255,.6);
-
   font-size: 9px;
-
   letter-spacing: 1.5px;
-
   cursor: pointer;
 }
 
@@ -1663,15 +2075,12 @@ footer {
 
   .haircuts-hero {
     min-height: 540px;
-
     padding: 80px 22px 60px;
-
     display: block;
   }
 
   .haircuts-hero h1 {
     font-size: clamp(55px, 17vw, 90px);
-
     letter-spacing: -4px;
   }
 
@@ -1681,9 +2090,7 @@ footer {
 
   .haircuts-hero-text {
     font-size: 13px;
-
     margin-top: 30px;
-
     max-width: 330px;
   }
 
@@ -1697,88 +2104,60 @@ footer {
 
   .haircut-section-heading {
     display: block;
-
     margin-bottom: 40px;
   }
 
   .haircut-section-heading h2 {
     font-size: 48px;
-
     letter-spacing: -2px;
   }
 
   .haircut-section-heading > p {
     margin-top: 25px;
-
     font-size: 12px;
   }
 
   .haircut-grid {
     grid-template-columns: 1fr;
-
     gap: 18px;
   }
 
-  /* MOBILE GLASS CARD */
-
   .haircut-card {
     display: block;
-
     min-height: auto;
-
     border-radius: 23px;
   }
 
-  /* MOBILE PHOTO FRAME */
-
   .haircut-image {
     width: calc(100% - 18px);
-
     height: auto;
-
     min-height: 0;
-
     margin: 9px;
-
     padding: 10px;
-
     border-radius: 19px;
-
     background: linear-gradient(
       135deg,
       rgba(255,255,255,.13),
       rgba(255,255,255,.035)
     );
-
     border: 1px solid rgba(255,255,255,.2);
-
     display: block;
   }
 
-  /* FULL PHOTO ON MOBILE */
-
   .haircut-image img {
     width: 100%;
-
     height: auto;
-
     min-height: 0;
-
     max-height: none;
-
     object-fit: contain;
-
     object-position: center;
-
     border-radius: 13px;
-
     background: #111;
   }
 
   .haircut-number {
     top: 20px;
     left: 20px;
-
     width: 38px;
     height: 38px;
   }
@@ -1795,71 +2174,54 @@ footer {
     max-width: 320px;
   }
 
-  /* PRICE + SELECT GLASS BOX MOBILE */
-
   .haircut-action-box {
     min-height: 52px;
-
     margin-top: 25px;
-
     border-radius: 15px;
-
     padding: 5px;
   }
 
   .haircut-price {
     padding-left: 13px;
-
     font-size: 15px;
   }
 
   .haircut-action-box .haircut-select {
     min-width: 115px;
-
     height: 40px;
-
     border-radius: 11px;
-
     gap: 10px;
   }
 
   .selected-style-bar {
     padding: 22px 20px;
-
     display: block;
   }
 
   .selected-style-bar button {
     width: 100%;
-
     margin-top: 18px;
   }
 
   .haircuts-bottom {
     padding: 80px 20px;
-
     min-height: 430px;
-
     display: block;
   }
 
   .haircuts-bottom h2 {
     font-size: 55px;
-
     letter-spacing: -3px;
   }
 
   .haircuts-bottom button {
     margin-top: 45px;
-
     width: 100%;
   }
 
   .haircuts-footer {
     padding: 28px 20px;
-
     flex-direction: column;
-
     align-items: flex-start;
   }
 
