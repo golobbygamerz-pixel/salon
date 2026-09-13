@@ -1,5 +1,5 @@
-import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, type FormEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import heroImage from "./IMG_0660.jpeg";
 
@@ -167,6 +167,8 @@ const beardStyles = [
   },
 ];
 
+type Service = (typeof services)[number];
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [date, setDate] = useState("");
@@ -180,6 +182,10 @@ function App() {
   const [selectedHaircut, setSelectedHaircut] = useState("");
   const [selectedBeard, setSelectedBeard] = useState("");
 
+  const [serviceModalOpen, setServiceModalOpen] = useState(false);
+  const [modalService, setModalService] = useState<Service | null>(null);
+  const [modalStyle, setModalStyle] = useState("");
+
   const selectedHaircutData = haircutStyles.find(
     (style) => style.name === selectedHaircut
   );
@@ -187,6 +193,32 @@ function App() {
   const selectedBeardData = beardStyles.find(
     (style) => style.name === selectedBeard
   );
+
+  useEffect(() => {
+    if (serviceModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [serviceModalOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setServiceModalOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const scrollTo = (id: string) => {
     setCurrentPage("home");
@@ -201,6 +233,7 @@ function App() {
   };
 
   const openHaircuts = () => {
+    setServiceModalOpen(false);
     setCurrentPage("haircuts");
     setMenuOpen(false);
 
@@ -211,6 +244,7 @@ function App() {
   };
 
   const openBeards = () => {
+    setServiceModalOpen(false);
     setCurrentPage("beards");
     setMenuOpen(false);
 
@@ -221,6 +255,7 @@ function App() {
   };
 
   const goHome = () => {
+    setServiceModalOpen(false);
     setCurrentPage("home");
 
     setTimeout(() => {
@@ -231,16 +266,45 @@ function App() {
     }, 50);
   };
 
+  const openServiceModal = (
+    serviceTitle: string,
+    styleName = ""
+  ) => {
+    const service = services.find(
+      (item) => item.title === serviceTitle
+    );
+
+    if (!service) return;
+
+    setSelectedService(serviceTitle);
+
+    if (serviceTitle !== "Haircut") {
+      setSelectedHaircut("");
+    }
+
+    if (serviceTitle !== "Beard Trim") {
+      setSelectedBeard("");
+    }
+
+    setModalService(service);
+    setModalStyle(styleName);
+    setServiceModalOpen(true);
+  };
+
   const selectHaircut = (style: string) => {
     setSelectedHaircut(style);
     setSelectedBeard("");
     setSelectedService("Haircut");
+
+    openServiceModal("Haircut", style);
   };
 
   const selectBeard = (style: string) => {
     setSelectedBeard(style);
     setSelectedHaircut("");
     setSelectedService("Beard Trim");
+
+    openServiceModal("Beard Trim", style);
   };
 
   const handleServiceChange = (service: string) => {
@@ -256,6 +320,7 @@ function App() {
   };
 
   const continueToBooking = () => {
+    setServiceModalOpen(false);
     setCurrentPage("home");
 
     setTimeout(() => {
@@ -307,29 +372,7 @@ function App() {
     );
   };
 
-  if (currentPage === "haircuts") {
-    return (
-      <HaircutsPage
-        selectedHaircut={selectedHaircut}
-        onBack={goHome}
-        onSelect={selectHaircut}
-        onBook={continueToBooking}
-      />
-    );
-  }
-
-  if (currentPage === "beards") {
-    return (
-      <BeardsPage
-        selectedBeard={selectedBeard}
-        onBack={goHome}
-        onSelect={selectBeard}
-        onBook={continueToBooking}
-      />
-    );
-  }
-
-  return (
+  const homePage = (
     <main>
       <header className="navbar">
         <div className="nav-inner">
@@ -550,19 +593,9 @@ function App() {
               transition={{
                 delay: index * 0.08,
               }}
-              onClick={() => {
-                if (service.title === "Haircut") {
-                  openHaircuts();
-                } else if (
-                  service.title === "Beard Trim"
-                ) {
-                  openBeards();
-                } else {
-                  setSelectedService(
-                    service.title
-                  );
-                }
-              }}
+              onClick={() =>
+                openServiceModal(service.title)
+              }
             >
               <div className="service-image">
                 <img
@@ -585,22 +618,7 @@ function App() {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-
-                      if (
-                        service.title ===
-                        "Haircut"
-                      ) {
-                        openHaircuts();
-                      } else if (
-                        service.title ===
-                        "Beard Trim"
-                      ) {
-                        openBeards();
-                      } else {
-                        setSelectedService(
-                          service.title
-                        );
-                      }
+                      openServiceModal(service.title);
                     }}
                   >
                     →
@@ -726,10 +744,6 @@ function App() {
           ))}
         </div>
       </section>
-
-      {/* =====================================================
-          PREMIUM BOOKING SECTION
-      ===================================================== */}
 
       <section
         id="booking"
@@ -1119,6 +1133,211 @@ function App() {
       </footer>
     </main>
   );
+
+  const pageContent =
+    currentPage === "haircuts" ? (
+      <HaircutsPage
+        selectedHaircut={selectedHaircut}
+        onBack={goHome}
+        onSelect={selectHaircut}
+        onBook={continueToBooking}
+      />
+    ) : currentPage === "beards" ? (
+      <BeardsPage
+        selectedBeard={selectedBeard}
+        onBack={goHome}
+        onSelect={selectBeard}
+        onBook={continueToBooking}
+      />
+    ) : (
+      homePage
+    );
+
+  return (
+    <>
+      {pageContent}
+
+      <ServiceModal
+        open={serviceModalOpen}
+        service={modalService}
+        styleName={modalStyle}
+        onClose={() => setServiceModalOpen(false)}
+        onBook={continueToBooking}
+        onChooseStyle={() => {
+          if (modalService?.title === "Haircut") {
+            openHaircuts();
+          }
+
+          if (modalService?.title === "Beard Trim") {
+            openBeards();
+          }
+        }}
+      />
+    </>
+  );
+}
+
+
+/* =====================================================
+   SERVICE MODAL
+===================================================== */
+
+function ServiceModal({
+  open,
+  service,
+  styleName,
+  onClose,
+  onBook,
+  onChooseStyle,
+}: {
+  open: boolean;
+  service: Service | null;
+  styleName: string;
+  onClose: () => void;
+  onBook: () => void;
+  onChooseStyle: () => void;
+}) {
+  if (!service) return null;
+
+  let stylePrice = service.price;
+
+  if (service.title === "Haircut" && styleName) {
+    const style = haircutStyles.find(
+      (item) => item.name === styleName
+    );
+
+    if (style) {
+      stylePrice = style.price;
+    }
+  }
+
+  if (service.title === "Beard Trim" && styleName) {
+    const style = beardStyles.find(
+      (item) => item.name === styleName
+    );
+
+    if (style) {
+      stylePrice = style.price;
+    }
+  }
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="service-modal-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) {
+              onClose();
+            }
+          }}
+        >
+          <motion.div
+            className="service-modal"
+            initial={{
+              opacity: 0,
+              y: 30,
+              scale: 0.96,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 20,
+              scale: 0.97,
+            }}
+            transition={{
+              duration: 0.28,
+              ease: "easeOut",
+            }}
+          >
+            <button
+              className="service-modal-close"
+              onClick={onClose}
+              aria-label="Close"
+            >
+              ×
+            </button>
+
+            <div className="service-modal-image">
+              <img
+                src={service.image}
+                alt={service.title}
+              />
+
+              <div className="service-modal-image-overlay" />
+
+              <span className="service-modal-icon">
+                ✦
+              </span>
+            </div>
+
+            <div className="service-modal-content">
+              <p className="service-modal-kicker">
+                SELECTED SERVICE
+              </p>
+
+              <h2 className="service-modal-title">
+                {styleName || service.title}
+              </h2>
+
+              <p className="service-modal-description">
+                {styleName
+                  ? service.title === "Haircut"
+                    ? "Your selected haircut style is ready. Continue to choose your preferred appointment time."
+                    : "Your selected beard style is ready. Continue to choose your preferred appointment time."
+                  : service.description}
+              </p>
+
+              <div className="service-modal-meta">
+                <span>
+                  {styleName
+                    ? service.title.toUpperCase()
+                    : "SERVICE"}
+                </span>
+
+                <strong>
+                  {stylePrice}
+                </strong>
+              </div>
+
+              <div className="service-modal-actions">
+                {(service.title === "Haircut" ||
+                  service.title === "Beard Trim") &&
+                  !styleName && (
+                    <button
+                      className="service-modal-secondary"
+                      onClick={onChooseStyle}
+                    >
+                      CHOOSE STYLE
+                      <span>↗</span>
+                    </button>
+                  )}
+
+                <button
+                  className="service-modal-primary"
+                  onClick={onBook}
+                >
+                  BOOK NOW
+                  <span>→</span>
+                </button>
+              </div>
+
+              <p className="service-modal-note">
+                Select your date & time after continuing.
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 }
 
 
@@ -1363,7 +1582,6 @@ function HaircutsPage({
 
 /* =====================================================
    BEARDS PAGE
-   Same premium glass design as Haircuts
 ===================================================== */
 
 function BeardsPage({
