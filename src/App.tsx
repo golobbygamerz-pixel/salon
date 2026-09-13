@@ -15,18 +15,21 @@ const WHATSAPP_NUMBER = "91XXXXXXXXXX";
 const services = [
   {
     title: "Haircut",
+    price: "₹399",
     description: "Precision cuts crafted for a sharp, modern look.",
     image:
       "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85",
   },
   {
     title: "Beard Trim",
+    price: "₹249",
     description: "Clean lines and perfect shape for a stronger presence.",
     image:
       "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85",
   },
   {
     title: "Hair Styling",
+    price: "₹299",
     description: "Modern styling designed around your personality.",
     image:
       "https://images.unsplash.com/photo-1599351431202-1e0f0d1a7e8e?auto=format&fit=crop&w=900&q=85",
@@ -77,6 +80,7 @@ const haircutStyles = [
   {
     number: "01",
     name: "Fade",
+    price: "₹200",
     description:
       "Clean, classic and timeless. A sharp fade designed for a fresh everyday look.",
     image: fadeImage,
@@ -84,6 +88,7 @@ const haircutStyles = [
   {
     number: "02",
     name: "Modern Fade",
+    price: "₹300",
     description:
       "A sharper contemporary fade with texture, movement and a modern finish.",
     image: modernFadeImage,
@@ -91,6 +96,7 @@ const haircutStyles = [
   {
     number: "03",
     name: "Mullet",
+    price: "₹400",
     description:
       "Retro inspired with a modern execution. Bold, expressive and made to stand out.",
     image: mulletImage,
@@ -98,6 +104,7 @@ const haircutStyles = [
   {
     number: "04",
     name: "Midline",
+    price: "₹350",
     description:
       "Balanced, clean and effortlessly stylish. A modern everyday hairstyle.",
     image: midlineImage,
@@ -105,6 +112,7 @@ const haircutStyles = [
   {
     number: "05",
     name: "Wolf",
+    price: "₹500",
     description:
       "Textured layers, natural volume and a bold edge. Made for trendsetters.",
     image: wolfImage,
@@ -112,6 +120,7 @@ const haircutStyles = [
   {
     number: "06",
     name: "Mod Cut",
+    price: "₹450",
     description:
       "A modern classic with clean lines and natural texture. Simple yet sharp.",
     image: modCutImage,
@@ -120,10 +129,8 @@ const haircutStyles = [
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-
   const [selectedService, setSelectedService] = useState("Haircut");
 
   const [currentPage, setCurrentPage] = useState<
@@ -201,9 +208,6 @@ function App() {
     );
   };
 
-  /*
-   * HAIRCUT PAGE
-   */
   if (currentPage === "haircuts") {
     return (
       <HaircutsPage
@@ -217,8 +221,6 @@ function App() {
 
   return (
     <main>
-      {/* NAVBAR */}
-
       <header className="navbar">
         <div className="nav-inner">
           <button
@@ -271,8 +273,6 @@ function App() {
           </button>
         </div>
       </header>
-
-      {/* HERO */}
 
       <section id="home" className="hero">
         <img
@@ -335,8 +335,6 @@ function App() {
               </div>
             </div>
           </motion.div>
-
-          {/* GLASS BOOKING CARD */}
 
           <motion.div
             className="booking-glass"
@@ -404,8 +402,6 @@ function App() {
         </div>
       </section>
 
-      {/* SERVICES */}
-
       <section
         id="services"
         className="section services-section"
@@ -464,7 +460,6 @@ function App() {
               <div className="service-info">
                 <div>
                   <h3>{service.title}</h3>
-
                   <p>{service.description}</p>
                 </div>
 
@@ -497,8 +492,6 @@ function App() {
           ))}
         </div>
       </section>
-
-      {/* ABOUT */}
 
       <section
         id="about"
@@ -537,8 +530,6 @@ function App() {
           </button>
         </div>
       </section>
-
-      {/* GALLERY */}
 
       <section
         id="gallery"
@@ -582,8 +573,6 @@ function App() {
         </div>
       </section>
 
-      {/* REVIEWS */}
-
       <section className="section reviews-section">
         <div className="reviews-title">
           <p className="eyebrow">
@@ -618,8 +607,6 @@ function App() {
           ))}
         </div>
       </section>
-
-      {/* BOOKING */}
 
       <section
         id="booking"
@@ -667,8 +654,6 @@ function App() {
               ))}
             </select>
 
-            {/* SELECTED HAIRCUT */}
-
             {selectedHaircut && (
               <>
                 <label>
@@ -679,7 +664,8 @@ function App() {
                   className="selected-haircut-input"
                   style={{
                     padding: "14px 16px",
-                    border: "1px solid rgba(255,255,255,0.15)",
+                    border:
+                      "1px solid rgba(255,255,255,0.15)",
                     background:
                       "rgba(255,255,255,0.04)",
                     color: "#fff",
@@ -718,8 +704,6 @@ function App() {
         </div>
       </section>
 
-      {/* CONTACT */}
-
       <section
         id="contact"
         className="contact-section"
@@ -739,13 +723,11 @@ function App() {
         <div className="contact-info">
           <div>
             <span>LOCATION</span>
-
             <p>Your City, India</p>
           </div>
 
           <div>
             <span>OPENING HOURS</span>
-
             <p>
               MON — SAT · 10AM — 9PM
             </p>
@@ -753,15 +735,12 @@ function App() {
 
           <div>
             <span>CONTACT</span>
-
             <p>
               WhatsApp for appointments
             </p>
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
 
       <footer>
         <div className="footer-logo">
@@ -823,6 +802,7 @@ function App() {
   );
 }
 
+
 /* =====================================================
    HAIRCUTS PAGE
 ===================================================== */
@@ -840,8 +820,6 @@ function HaircutsPage({
 }) {
   return (
     <main className="haircuts-page">
-
-      {/* NAV */}
 
       <header className="haircuts-nav">
         <button
@@ -870,8 +848,6 @@ function HaircutsPage({
           <span>↗</span>
         </button>
       </header>
-
-      {/* HERO */}
 
       <section className="haircuts-hero">
         <div className="haircuts-hero-content">
@@ -903,8 +879,6 @@ function HaircutsPage({
         </div>
       </section>
 
-      {/* SELECTION */}
-
       <section className="haircut-selection">
         <div className="haircut-section-heading">
           <div>
@@ -929,8 +903,7 @@ function HaircutsPage({
         <div className="haircut-grid">
           {haircutStyles.map((style) => {
             const isSelected =
-              selectedHaircut ===
-              style.name;
+              selectedHaircut === style.name;
 
             return (
               <motion.article
@@ -967,9 +940,9 @@ function HaircutsPage({
                 </div>
 
                 <div className="haircut-info">
+
                   <p className="haircut-small">
-                    HAIRCUT /{" "}
-                    {style.number}
+                    HAIRCUT / {style.number}
                   </p>
 
                   <h3>{style.name}</h3>
@@ -978,32 +951,39 @@ function HaircutsPage({
                     {style.description}
                   </p>
 
-                  <button
-                    className="haircut-select"
-                    onClick={() =>
-                      onSelect(
-                        style.name
-                      )
-                    }
-                  >
-                    {isSelected
-                      ? "SELECTED"
-                      : "SELECT"}
+                  {/* PRICE + SELECT GLASS BOX */}
 
-                    <span>
+                  <div className="haircut-action-box">
+
+                    <strong className="haircut-price">
+                      {style.price}
+                    </strong>
+
+                    <button
+                      className="haircut-select"
+                      onClick={() =>
+                        onSelect(style.name)
+                      }
+                    >
                       {isSelected
-                        ? "✓"
-                        : "→"}
-                    </span>
-                  </button>
+                        ? "SELECTED"
+                        : "SELECT"}
+
+                      <span>
+                        {isSelected
+                          ? "✓"
+                          : "→"}
+                      </span>
+                    </button>
+
+                  </div>
+
                 </div>
               </motion.article>
             );
           })}
         </div>
       </section>
-
-      {/* SELECTED STYLE */}
 
       {selectedHaircut && (
         <section className="selected-style-bar">
@@ -1024,8 +1004,6 @@ function HaircutsPage({
         </section>
       )}
 
-      {/* BOTTOM CTA */}
-
       <section className="haircuts-bottom">
         <div>
           <span>
@@ -1045,8 +1023,6 @@ function HaircutsPage({
         </button>
       </section>
 
-      {/* FOOTER */}
-
       <footer className="haircuts-footer">
         <div className="haircuts-footer-logo">
           THE<span>CUT</span>
@@ -1062,6 +1038,7 @@ function HaircutsPage({
           BACK TO HOME ↑
         </button>
       </footer>
+
     </main>
   );
 }
