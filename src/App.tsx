@@ -266,9 +266,15 @@ function App() {
     }, 50);
   };
 
-  const openServiceModal = (
+  /*
+    IMPORTANT:
+    Popup ONLY opens after a specific haircut/beard style
+    is selected.
+  */
+
+  const openStyleModal = (
     serviceTitle: string,
-    styleName = ""
+    styleName: string
   ) => {
     const service = services.find(
       (item) => item.title === serviceTitle
@@ -278,12 +284,14 @@ function App() {
 
     setSelectedService(serviceTitle);
 
-    if (serviceTitle !== "Haircut") {
-      setSelectedHaircut("");
+    if (serviceTitle === "Haircut") {
+      setSelectedHaircut(styleName);
+      setSelectedBeard("");
     }
 
-    if (serviceTitle !== "Beard Trim") {
-      setSelectedBeard("");
+    if (serviceTitle === "Beard Trim") {
+      setSelectedBeard(styleName);
+      setSelectedHaircut("");
     }
 
     setModalService(service);
@@ -292,19 +300,11 @@ function App() {
   };
 
   const selectHaircut = (style: string) => {
-    setSelectedHaircut(style);
-    setSelectedBeard("");
-    setSelectedService("Haircut");
-
-    openServiceModal("Haircut", style);
+    openStyleModal("Haircut", style);
   };
 
   const selectBeard = (style: string) => {
-    setSelectedBeard(style);
-    setSelectedHaircut("");
-    setSelectedService("Beard Trim");
-
-    openServiceModal("Beard Trim", style);
+    openStyleModal("Beard Trim", style);
   };
 
   const handleServiceChange = (service: string) => {
@@ -326,7 +326,9 @@ function App() {
     setTimeout(() => {
       document
         .getElementById("booking")
-        ?.scrollIntoView({ behavior: "smooth" });
+        ?.scrollIntoView({
+          behavior: "smooth",
+        });
     }, 100);
   };
 
@@ -376,6 +378,7 @@ function App() {
     <main>
       <header className="navbar">
         <div className="nav-inner">
+
           <button
             className="logo"
             onClick={() => scrollTo("home")}
@@ -386,26 +389,36 @@ function App() {
 
           <nav
             className={
-              menuOpen ? "nav-links open" : "nav-links"
+              menuOpen
+                ? "nav-links open"
+                : "nav-links"
             }
           >
             <button onClick={() => scrollTo("home")}>
               Home
             </button>
 
-            <button onClick={() => scrollTo("services")}>
+            <button
+              onClick={() => scrollTo("services")}
+            >
               Services
             </button>
 
-            <button onClick={() => scrollTo("about")}>
+            <button
+              onClick={() => scrollTo("about")}
+            >
               About
             </button>
 
-            <button onClick={() => scrollTo("gallery")}>
+            <button
+              onClick={() => scrollTo("gallery")}
+            >
               Gallery
             </button>
 
-            <button onClick={() => scrollTo("contact")}>
+            <button
+              onClick={() => scrollTo("contact")}
+            >
               Contact
             </button>
           </nav>
@@ -420,14 +433,20 @@ function App() {
 
           <button
             className="menu-button"
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() =>
+              setMenuOpen(!menuOpen)
+            }
           >
             {menuOpen ? "×" : "☰"}
           </button>
+
         </div>
       </header>
 
-      <section id="home" className="hero">
+      <section
+        id="home"
+        className="hero"
+      >
         <img
           className="hero-bg"
           src={heroImage}
@@ -437,11 +456,20 @@ function App() {
         <div className="hero-overlay" />
 
         <div className="hero-content">
+
           <motion.div
             className="hero-copy"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{
+              opacity: 0,
+              y: 30,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.8,
+            }}
           >
             <p className="eyebrow">
               MORE THAN A HAIRCUT
@@ -450,16 +478,19 @@ function App() {
             <h1>
               Premium Cuts,
               <br />
-              <span>Modern Style.</span>
+              <span>
+                Modern Style.
+              </span>
             </h1>
 
             <p className="hero-description">
               Expert haircuts, clean fades, and
-              personalized grooming — designed for
-              the modern man.
+              personalized grooming — designed
+              for the modern man.
             </p>
 
             <div className="hero-features">
+
               <div>
                 <strong>✂</strong>
                 <span>
@@ -486,28 +517,39 @@ function App() {
                   Safe
                 </span>
               </div>
+
             </div>
           </motion.div>
 
           <motion.div
             className="booking-glass"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{
+              opacity: 0,
+              x: 50,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
             transition={{
               duration: 0.8,
               delay: 0.2,
             }}
           >
             <div className="glass-top">
+
               <p className="eyebrow">
                 BOOK APPOINTMENT
               </p>
 
               <button
-                onClick={() => scrollTo("home")}
+                onClick={() =>
+                  scrollTo("home")
+                }
               >
                 ×
               </button>
+
             </div>
 
             <h2>
@@ -546,12 +588,16 @@ function App() {
 
             <button
               className="glass-book"
-              onClick={() => bookAppointment()}
+              onClick={() =>
+                bookAppointment()
+              }
             >
               Book Now
               <span>→</span>
             </button>
+
           </motion.div>
+
         </div>
       </section>
 
@@ -560,73 +606,138 @@ function App() {
         className="section services-section"
       >
         <div className="section-heading">
+
           <div>
             <p className="eyebrow">
               OUR SERVICES
             </p>
 
-            <h2>Premium Grooming Services</h2>
+            <h2>
+              Premium Grooming Services
+            </h2>
           </div>
 
           <div className="heading-note">
             <span />
             Tailored for your style
           </div>
+
         </div>
 
         <div className="services-grid">
-          {services.map((service, index) => (
-            <motion.article
-              className="service-card"
-              key={service.title}
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                delay: index * 0.08,
-              }}
-              onClick={() =>
-                openServiceModal(service.title)
-              }
-            >
-              <div className="service-image">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                />
-              </div>
 
-              <div className="service-info">
-                <div>
-                  <h3>{service.title}</h3>
-                  <p>{service.description}</p>
+          {services.map(
+            (service, index) => (
+              <motion.article
+                className="service-card"
+                key={service.title}
+                initial={{
+                  opacity: 0,
+                  y: 30,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                }}
+                transition={{
+                  delay: index * 0.08,
+                }}
+
+                /*
+                  IMPORTANT:
+                  Haircut card -> Haircuts page
+                  Beard card -> Beards page
+                  Other services -> simply select
+                  NO POPUP HERE
+                */
+                onClick={() => {
+
+                  if (
+                    service.title ===
+                    "Haircut"
+                  ) {
+                    openHaircuts();
+                    return;
+                  }
+
+                  if (
+                    service.title ===
+                    "Beard Trim"
+                  ) {
+                    openBeards();
+                    return;
+                  }
+
+                  setSelectedService(
+                    service.title
+                  );
+                }}
+              >
+
+                <div className="service-image">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                  />
                 </div>
 
-                <div className="service-bottom">
-                  <strong>
-                    {service.price}
-                  </strong>
+                <div className="service-info">
 
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openServiceModal(service.title);
-                    }}
-                  >
-                    →
-                  </button>
+                  <div>
+                    <h3>
+                      {service.title}
+                    </h3>
+
+                    <p>
+                      {service.description}
+                    </p>
+                  </div>
+
+                  <div className="service-bottom">
+
+                    <strong>
+                      {service.price}
+                    </strong>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+
+                        if (
+                          service.title ===
+                          "Haircut"
+                        ) {
+                          openHaircuts();
+                          return;
+                        }
+
+                        if (
+                          service.title ===
+                          "Beard Trim"
+                        ) {
+                          openBeards();
+                          return;
+                        }
+
+                        setSelectedService(
+                          service.title
+                        );
+                      }}
+                    >
+                      →
+                    </button>
+
+                  </div>
+
                 </div>
-              </div>
-            </motion.article>
-          ))}
+
+              </motion.article>
+            )
+          )}
+
         </div>
       </section>
 
@@ -642,7 +753,10 @@ function App() {
         </div>
 
         <div className="statement-content">
-          <p className="eyebrow">THE CUT</p>
+
+          <p className="eyebrow">
+            THE CUT
+          </p>
 
           <h2>
             Style Is a Form
@@ -665,6 +779,7 @@ function App() {
           >
             Book Your Experience →
           </button>
+
         </div>
       </section>
 
@@ -673,6 +788,7 @@ function App() {
         className="section gallery-section"
       >
         <div className="section-heading">
+
           <div>
             <p className="eyebrow">
               SELECTED WORK
@@ -682,36 +798,43 @@ function App() {
               Crafted With Precision.
             </h2>
           </div>
+
         </div>
 
         <div className="gallery-grid">
-          {gallery.map((image, index) => (
-            <motion.div
-              className={`gallery-item gallery-${
-                index + 1
-              }`}
-              key={image}
-              initial={{
-                opacity: 0,
-              }}
-              whileInView={{
-                opacity: 1,
-              }}
-              viewport={{
-                once: true,
-              }}
-            >
-              <img
-                src={image}
-                alt="Barber work"
-              />
-            </motion.div>
-          ))}
+
+          {gallery.map(
+            (image, index) => (
+              <motion.div
+                className={`gallery-item gallery-${
+                  index + 1
+                }`}
+                key={image}
+                initial={{
+                  opacity: 0,
+                }}
+                whileInView={{
+                  opacity: 1,
+                }}
+                viewport={{
+                  once: true,
+                }}
+              >
+                <img
+                  src={image}
+                  alt="Barber work"
+                />
+              </motion.div>
+            )
+          )}
+
         </div>
       </section>
 
       <section className="section reviews-section">
+
         <div className="reviews-title">
+
           <p className="eyebrow">
             CLIENT WORDS
           </p>
@@ -721,27 +844,34 @@ function App() {
             <br />
             Our Word For It.
           </h2>
+
         </div>
 
         <div className="reviews-grid">
-          {reviews.map((review) => (
-            <div
-              className="review-card"
-              key={review.name}
-            >
-              <div className="stars">
-                ★★★★★
+
+          {reviews.map(
+            (review) => (
+              <div
+                className="review-card"
+                key={review.name}
+              >
+
+                <div className="stars">
+                  ★★★★★
+                </div>
+
+                <p>
+                  "{review.text}"
+                </p>
+
+                <span>
+                  — {review.name}
+                </span>
+
               </div>
+            )
+          )}
 
-              <p>
-                "{review.text}"
-              </p>
-
-              <span>
-                — {review.name}
-              </span>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -768,7 +898,9 @@ function App() {
               duration: 0.7,
             }}
           >
+
             <div className="booking-copy-top">
+
               <span className="booking-index">
                 01
               </span>
@@ -776,6 +908,7 @@ function App() {
               <p className="eyebrow">
                 READY FOR A CHANGE?
               </p>
+
             </div>
 
             <h2>
@@ -795,10 +928,12 @@ function App() {
 
               <div className="booking-step">
                 <span>01</span>
+
                 <div>
                   <strong>
                     Choose your service
                   </strong>
+
                   <p>
                     Pick the grooming experience
                     that suits you.
@@ -808,10 +943,12 @@ function App() {
 
               <div className="booking-step">
                 <span>02</span>
+
                 <div>
                   <strong>
                     Select your time
                   </strong>
+
                   <p>
                     Choose a date and convenient
                     appointment time.
@@ -821,10 +958,12 @@ function App() {
 
               <div className="booking-step">
                 <span>03</span>
+
                 <div>
                   <strong>
                     Confirm on WhatsApp
                   </strong>
+
                   <p>
                     We'll confirm your appointment
                     personally.
@@ -833,6 +972,7 @@ function App() {
               </div>
 
             </div>
+
           </motion.div>
 
           <motion.form
@@ -856,6 +996,7 @@ function App() {
           >
 
             <div className="booking-form-header">
+
               <div>
                 <span>
                   APPOINTMENT REQUEST
@@ -870,16 +1011,19 @@ function App() {
                 <span />
                 WHATSAPP
               </div>
+
             </div>
 
             <div className="booking-form-divider" />
 
             <div className="booking-field-group">
+
               <label>
                 SELECT SERVICE
               </label>
 
               <div className="booking-input-shell">
+
                 <span className="booking-field-icon">
                   ◇
                 </span>
@@ -892,23 +1036,30 @@ function App() {
                     )
                   }
                 >
-                  {services.map((service) => (
-                    <option
-                      key={service.title}
-                    >
-                      {service.title}
-                    </option>
-                  ))}
+                  {services.map(
+                    (service) => (
+                      <option
+                        key={
+                          service.title
+                        }
+                      >
+                        {service.title}
+                      </option>
+                    )
+                  )}
                 </select>
 
                 <span className="booking-field-arrow">
                   ↓
                 </span>
+
               </div>
+
             </div>
 
             {selectedHaircut && (
               <div className="booking-field-group">
+
                 <label>
                   SELECTED HAIRCUT
                 </label>
@@ -920,6 +1071,7 @@ function App() {
                   </div>
 
                   <div className="selected-haircut-info">
+
                     <strong>
                       {selectedHaircut}
                     </strong>
@@ -927,18 +1079,23 @@ function App() {
                     <span>
                       HAIRCUT STYLE
                     </span>
+
                   </div>
 
                   <strong className="selected-haircut-price">
-                    {selectedHaircutData?.price}
+                    {
+                      selectedHaircutData?.price
+                    }
                   </strong>
 
                 </div>
+
               </div>
             )}
 
             {selectedBeard && (
               <div className="booking-field-group">
+
                 <label>
                   SELECTED BEARD
                 </label>
@@ -950,6 +1107,7 @@ function App() {
                   </div>
 
                   <div className="selected-haircut-info">
+
                     <strong>
                       {selectedBeard}
                     </strong>
@@ -957,22 +1115,28 @@ function App() {
                     <span>
                       BEARD STYLE
                     </span>
+
                   </div>
 
                   <strong className="selected-haircut-price">
-                    {selectedBeardData?.price}
+                    {
+                      selectedBeardData?.price
+                    }
                   </strong>
 
                 </div>
+
               </div>
             )}
 
             <div className="booking-field-group">
+
               <label>
                 PREFERRED DATE
               </label>
 
               <div className="booking-input-shell">
+
                 <span className="booking-field-icon">
                   □
                 </span>
@@ -988,15 +1152,19 @@ function App() {
                 <span className="booking-field-arrow">
                   →
                 </span>
+
               </div>
+
             </div>
 
             <div className="booking-field-group">
+
               <label>
                 PREFERRED TIME
               </label>
 
               <div className="booking-input-shell">
+
                 <span className="booking-field-icon">
                   ◷
                 </span>
@@ -1012,7 +1180,9 @@ function App() {
                 <span className="booking-field-arrow">
                   →
                 </span>
+
               </div>
+
             </div>
 
             <button
@@ -1034,6 +1204,7 @@ function App() {
             </p>
 
           </motion.form>
+
         </div>
       </section>
 
@@ -1041,7 +1212,9 @@ function App() {
         id="contact"
         className="contact-section"
       >
+
         <div>
+
           <p className="eyebrow">
             VISIT THE CUT
           </p>
@@ -1051,39 +1224,57 @@ function App() {
             <br />
             Better Days.
           </h2>
+
         </div>
 
         <div className="contact-info">
+
           <div>
-            <span>LOCATION</span>
-            <p>Your City, India</p>
+            <span>
+              LOCATION
+            </span>
+
+            <p>
+              Your City, India
+            </p>
           </div>
 
           <div>
-            <span>OPENING HOURS</span>
+            <span>
+              OPENING HOURS
+            </span>
+
             <p>
               MON — SAT · 10AM — 9PM
             </p>
           </div>
 
           <div>
-            <span>CONTACT</span>
+            <span>
+              CONTACT
+            </span>
+
             <p>
               WhatsApp for appointments
             </p>
           </div>
+
         </div>
+
       </section>
 
       <footer>
+
         <div className="footer-logo">
           THE CUT
+
           <span>
             MEN'S HAIR ARTIST
           </span>
         </div>
 
         <div className="footer-links">
+
           <button
             onClick={() =>
               scrollTo("home")
@@ -1123,6 +1314,7 @@ function App() {
           >
             Contact
           </button>
+
         </div>
 
         <div className="socials">
@@ -1130,21 +1322,27 @@ function App() {
           <span>◉</span>
           <span>𝕏</span>
         </div>
+
       </footer>
+
     </main>
   );
 
   const pageContent =
     currentPage === "haircuts" ? (
       <HaircutsPage
-        selectedHaircut={selectedHaircut}
+        selectedHaircut={
+          selectedHaircut
+        }
         onBack={goHome}
         onSelect={selectHaircut}
         onBook={continueToBooking}
       />
     ) : currentPage === "beards" ? (
       <BeardsPage
-        selectedBeard={selectedBeard}
+        selectedBeard={
+          selectedBeard
+        }
         onBack={goHome}
         onSelect={selectBeard}
         onBook={continueToBooking}
@@ -1161,16 +1359,26 @@ function App() {
         open={serviceModalOpen}
         service={modalService}
         styleName={modalStyle}
-        onClose={() => setServiceModalOpen(false)}
+        onClose={() =>
+          setServiceModalOpen(false)
+        }
         onBook={continueToBooking}
         onChooseStyle={() => {
-          if (modalService?.title === "Haircut") {
+
+          if (
+            modalService?.title ===
+            "Haircut"
+          ) {
             openHaircuts();
           }
 
-          if (modalService?.title === "Beard Trim") {
+          if (
+            modalService?.title ===
+            "Beard Trim"
+          ) {
             openBeards();
           }
+
         }}
       />
     </>
@@ -1201,20 +1409,30 @@ function ServiceModal({
 
   let stylePrice = service.price;
 
-  if (service.title === "Haircut" && styleName) {
-    const style = haircutStyles.find(
-      (item) => item.name === styleName
-    );
+  if (
+    service.title === "Haircut" &&
+    styleName
+  ) {
+    const style =
+      haircutStyles.find(
+        (item) =>
+          item.name === styleName
+      );
 
     if (style) {
       stylePrice = style.price;
     }
   }
 
-  if (service.title === "Beard Trim" && styleName) {
-    const style = beardStyles.find(
-      (item) => item.name === styleName
-    );
+  if (
+    service.title === "Beard Trim" &&
+    styleName
+  ) {
+    const style =
+      beardStyles.find(
+        (item) =>
+          item.name === styleName
+      );
 
     if (style) {
       stylePrice = style.price;
@@ -1226,15 +1444,25 @@ function ServiceModal({
       {open && (
         <motion.div
           className="service-modal-backdrop"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          exit={{
+            opacity: 0,
+          }}
           onMouseDown={(e) => {
-            if (e.target === e.currentTarget) {
+            if (
+              e.target ===
+              e.currentTarget
+            ) {
               onClose();
             }
           }}
         >
+
           <motion.div
             className="service-modal"
             initial={{
@@ -1257,6 +1485,7 @@ function ServiceModal({
               ease: "easeOut",
             }}
           >
+
             <button
               className="service-modal-close"
               onClick={onClose}
@@ -1266,6 +1495,7 @@ function ServiceModal({
             </button>
 
             <div className="service-modal-image">
+
               <img
                 src={service.image}
                 alt={service.title}
@@ -1276,26 +1506,33 @@ function ServiceModal({
               <span className="service-modal-icon">
                 ✦
               </span>
+
             </div>
 
             <div className="service-modal-content">
+
               <p className="service-modal-kicker">
-                SELECTED SERVICE
+                STYLE SELECTED
               </p>
 
               <h2 className="service-modal-title">
-                {styleName || service.title}
+                {styleName ||
+                  service.title}
               </h2>
 
               <p className="service-modal-description">
+
                 {styleName
-                  ? service.title === "Haircut"
+                  ? service.title ===
+                    "Haircut"
                     ? "Your selected haircut style is ready. Continue to choose your preferred appointment time."
                     : "Your selected beard style is ready. Continue to choose your preferred appointment time."
                   : service.description}
+
               </p>
 
               <div className="service-modal-meta">
+
                 <span>
                   {styleName
                     ? service.title.toUpperCase()
@@ -1305,18 +1542,28 @@ function ServiceModal({
                 <strong>
                   {stylePrice}
                 </strong>
+
               </div>
 
               <div className="service-modal-actions">
-                {(service.title === "Haircut" ||
-                  service.title === "Beard Trim") &&
+
+                {(
+                  service.title ===
+                    "Haircut" ||
+                  service.title ===
+                    "Beard Trim"
+                ) &&
                   !styleName && (
                     <button
                       className="service-modal-secondary"
-                      onClick={onChooseStyle}
+                      onClick={
+                        onChooseStyle
+                      }
                     >
                       CHOOSE STYLE
-                      <span>↗</span>
+                      <span>
+                        ↗
+                      </span>
                     </button>
                   )}
 
@@ -1325,15 +1572,21 @@ function ServiceModal({
                   onClick={onBook}
                 >
                   BOOK NOW
-                  <span>→</span>
+                  <span>
+                    →
+                  </span>
                 </button>
+
               </div>
 
               <p className="service-modal-note">
                 Select your date & time after continuing.
               </p>
+
             </div>
+
           </motion.div>
+
         </motion.div>
       )}
     </AnimatePresence>
@@ -1360,6 +1613,7 @@ function HaircutsPage({
     <main className="haircuts-page">
 
       <header className="haircuts-nav">
+
         <button
           className="haircuts-logo"
           onClick={onBack}
@@ -1368,6 +1622,7 @@ function HaircutsPage({
         </button>
 
         <nav className="haircuts-nav-links">
+
           <button onClick={onBack}>
             HOME
           </button>
@@ -1376,6 +1631,7 @@ function HaircutsPage({
           <span>ABOUT</span>
           <span>GALLERY</span>
           <span>CONTACT</span>
+
         </nav>
 
         <button
@@ -1385,10 +1641,13 @@ function HaircutsPage({
           BOOK APPOINTMENT
           <span>↗</span>
         </button>
+
       </header>
 
       <section className="haircuts-hero">
+
         <div className="haircuts-hero-content">
+
           <p className="haircuts-eyebrow">
             OUR SERVICES
           </p>
@@ -1396,7 +1655,9 @@ function HaircutsPage({
           <h1>
             Haircuts
             <br />
-            <em>Find Your Style.</em>
+            <em>
+              Find Your Style.
+            </em>
           </h1>
 
           <p className="haircuts-hero-text">
@@ -1405,21 +1666,29 @@ function HaircutsPage({
             your personality, face shape and
             lifestyle.
           </p>
+
         </div>
 
         <div className="haircuts-hero-side">
+
           <span />
+
           <p>
             Not just a haircut,
             <br />
             it's a new you.
           </p>
+
         </div>
+
       </section>
 
       <section className="haircut-selection">
+
         <div className="haircut-section-heading">
+
           <div>
+
             <span>
               01 / CHOOSE YOUR LOOK
             </span>
@@ -1427,8 +1696,11 @@ function HaircutsPage({
             <h2>
               SELECT YOUR
               <br />
-              <em>HAIRCUT.</em>
+              <em>
+                HAIRCUT.
+              </em>
             </h2>
+
           </div>
 
           <p>
@@ -1436,94 +1708,114 @@ function HaircutsPage({
             Your selection will be added to
             your appointment request.
           </p>
+
         </div>
 
         <div className="haircut-grid">
-          {haircutStyles.map((style) => {
-            const isSelected =
-              selectedHaircut === style.name;
 
-            return (
-              <motion.article
-                className={`haircut-card ${
-                  isSelected
-                    ? "haircut-selected"
-                    : ""
-                }`}
-                key={style.name}
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.5,
-                }}
-              >
-                <div className="haircut-image">
-                  <img
-                    src={style.image}
-                    alt={style.name}
-                  />
+          {haircutStyles.map(
+            (style) => {
 
-                  <div className="haircut-number">
-                    {style.number}
+              const isSelected =
+                selectedHaircut ===
+                style.name;
+
+              return (
+                <motion.article
+                  className={`haircut-card ${
+                    isSelected
+                      ? "haircut-selected"
+                      : ""
+                  }`}
+                  key={style.name}
+                  initial={{
+                    opacity: 0,
+                    y: 30,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                  }}
+                >
+
+                  <div className="haircut-image">
+
+                    <img
+                      src={style.image}
+                      alt={style.name}
+                    />
+
+                    <div className="haircut-number">
+                      {style.number}
+                    </div>
+
                   </div>
-                </div>
 
-                <div className="haircut-info">
+                  <div className="haircut-info">
 
-                  <p className="haircut-small">
-                    HAIRCUT / {style.number}
-                  </p>
+                    <p className="haircut-small">
+                      HAIRCUT /{" "}
+                      {style.number}
+                    </p>
 
-                  <h3>{style.name}</h3>
+                    <h3>
+                      {style.name}
+                    </h3>
 
-                  <p className="haircut-description">
-                    {style.description}
-                  </p>
+                    <p className="haircut-description">
+                      {style.description}
+                    </p>
 
-                  <div className="haircut-action-box">
+                    <div className="haircut-action-box">
 
-                    <strong className="haircut-price">
-                      {style.price}
-                    </strong>
+                      <strong className="haircut-price">
+                        {style.price}
+                      </strong>
 
-                    <button
-                      className="haircut-select"
-                      onClick={() =>
-                        onSelect(style.name)
-                      }
-                    >
-                      {isSelected
-                        ? "SELECTED"
-                        : "SELECT"}
-
-                      <span>
+                      <button
+                        className="haircut-select"
+                        onClick={() =>
+                          onSelect(
+                            style.name
+                          )
+                        }
+                      >
                         {isSelected
-                          ? "✓"
-                          : "→"}
-                      </span>
-                    </button>
+                          ? "SELECTED"
+                          : "SELECT"}
+
+                        <span>
+                          {isSelected
+                            ? "✓"
+                            : "→"}
+                        </span>
+
+                      </button>
+
+                    </div>
 
                   </div>
 
-                </div>
-              </motion.article>
-            );
-          })}
+                </motion.article>
+              );
+            }
+          )}
+
         </div>
+
       </section>
 
       {selectedHaircut && (
         <section className="selected-style-bar">
+
           <div>
+
             <span>
               YOUR SELECTED STYLE
             </span>
@@ -1531,17 +1823,25 @@ function HaircutsPage({
             <strong>
               {selectedHaircut}
             </strong>
+
           </div>
 
-          <button onClick={onBook}>
+          <button
+            onClick={onBook}
+          >
             CONTINUE TO BOOK
-            <span>→</span>
+            <span>
+              →
+            </span>
           </button>
+
         </section>
       )}
 
       <section className="haircuts-bottom">
+
         <div>
+
           <span>
             READY FOR A CHANGE?
           </span>
@@ -1549,17 +1849,26 @@ function HaircutsPage({
           <h2>
             BOOK YOUR
             <br />
-            <em>APPOINTMENT.</em>
+            <em>
+              APPOINTMENT.
+            </em>
           </h2>
+
         </div>
 
-        <button onClick={onBook}>
+        <button
+          onClick={onBook}
+        >
           BOOK NOW
-          <span>↗</span>
+          <span>
+            ↗
+          </span>
         </button>
+
       </section>
 
       <footer className="haircuts-footer">
+
         <div className="haircuts-footer-logo">
           THE<span>CUT</span>
         </div>
@@ -1570,9 +1879,12 @@ function HaircutsPage({
           PRECISION · STYLE · IDENTITY
         </p>
 
-        <button onClick={onBack}>
+        <button
+          onClick={onBack}
+        >
           BACK TO HOME ↑
         </button>
+
       </footer>
 
     </main>
@@ -1599,6 +1911,7 @@ function BeardsPage({
     <main className="haircuts-page">
 
       <header className="haircuts-nav">
+
         <button
           className="haircuts-logo"
           onClick={onBack}
@@ -1607,6 +1920,7 @@ function BeardsPage({
         </button>
 
         <nav className="haircuts-nav-links">
+
           <button onClick={onBack}>
             HOME
           </button>
@@ -1615,6 +1929,7 @@ function BeardsPage({
           <span>ABOUT</span>
           <span>GALLERY</span>
           <span>CONTACT</span>
+
         </nav>
 
         <button
@@ -1624,10 +1939,13 @@ function BeardsPage({
           BOOK APPOINTMENT
           <span>↗</span>
         </button>
+
       </header>
 
       <section className="haircuts-hero">
+
         <div className="haircuts-hero-content">
+
           <p className="haircuts-eyebrow">
             OUR SERVICES
           </p>
@@ -1635,7 +1953,9 @@ function BeardsPage({
           <h1>
             Beard Trim
             <br />
-            <em>Find Your Style.</em>
+            <em>
+              Find Your Style.
+            </em>
           </h1>
 
           <p className="haircuts-hero-text">
@@ -1643,21 +1963,29 @@ function BeardsPage({
             clean shave, choose the beard style
             that defines your look.
           </p>
+
         </div>
 
         <div className="haircuts-hero-side">
+
           <span />
+
           <p>
             Sharp lines,
             <br />
             stronger presence.
           </p>
+
         </div>
+
       </section>
 
       <section className="haircut-selection">
+
         <div className="haircut-section-heading">
+
           <div>
+
             <span>
               01 / CHOOSE YOUR LOOK
             </span>
@@ -1665,8 +1993,11 @@ function BeardsPage({
             <h2>
               SELECT YOUR
               <br />
-              <em>BEARD.</em>
+              <em>
+                BEARD.
+              </em>
             </h2>
+
           </div>
 
           <p>
@@ -1674,94 +2005,114 @@ function BeardsPage({
             Your selection will be added to
             your appointment request.
           </p>
+
         </div>
 
         <div className="haircut-grid">
-          {beardStyles.map((style) => {
-            const isSelected =
-              selectedBeard === style.name;
 
-            return (
-              <motion.article
-                className={`haircut-card ${
-                  isSelected
-                    ? "haircut-selected"
-                    : ""
-                }`}
-                key={style.name}
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.5,
-                }}
-              >
-                <div className="haircut-image">
-                  <img
-                    src={style.image}
-                    alt={style.name}
-                  />
+          {beardStyles.map(
+            (style) => {
 
-                  <div className="haircut-number">
-                    {style.number}
+              const isSelected =
+                selectedBeard ===
+                style.name;
+
+              return (
+                <motion.article
+                  className={`haircut-card ${
+                    isSelected
+                      ? "haircut-selected"
+                      : ""
+                  }`}
+                  key={style.name}
+                  initial={{
+                    opacity: 0,
+                    y: 30,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                  }}
+                >
+
+                  <div className="haircut-image">
+
+                    <img
+                      src={style.image}
+                      alt={style.name}
+                    />
+
+                    <div className="haircut-number">
+                      {style.number}
+                    </div>
+
                   </div>
-                </div>
 
-                <div className="haircut-info">
+                  <div className="haircut-info">
 
-                  <p className="haircut-small">
-                    BEARD / {style.number}
-                  </p>
+                    <p className="haircut-small">
+                      BEARD /{" "}
+                      {style.number}
+                    </p>
 
-                  <h3>{style.name}</h3>
+                    <h3>
+                      {style.name}
+                    </h3>
 
-                  <p className="haircut-description">
-                    {style.description}
-                  </p>
+                    <p className="haircut-description">
+                      {style.description}
+                    </p>
 
-                  <div className="haircut-action-box">
+                    <div className="haircut-action-box">
 
-                    <strong className="haircut-price">
-                      {style.price}
-                    </strong>
+                      <strong className="haircut-price">
+                        {style.price}
+                      </strong>
 
-                    <button
-                      className="haircut-select"
-                      onClick={() =>
-                        onSelect(style.name)
-                      }
-                    >
-                      {isSelected
-                        ? "SELECTED"
-                        : "SELECT"}
-
-                      <span>
+                      <button
+                        className="haircut-select"
+                        onClick={() =>
+                          onSelect(
+                            style.name
+                          )
+                        }
+                      >
                         {isSelected
-                          ? "✓"
-                          : "→"}
-                      </span>
-                    </button>
+                          ? "SELECTED"
+                          : "SELECT"}
+
+                        <span>
+                          {isSelected
+                            ? "✓"
+                            : "→"}
+                        </span>
+
+                      </button>
+
+                    </div>
 
                   </div>
 
-                </div>
-              </motion.article>
-            );
-          })}
+                </motion.article>
+              );
+            }
+          )}
+
         </div>
+
       </section>
 
       {selectedBeard && (
         <section className="selected-style-bar">
+
           <div>
+
             <span>
               YOUR SELECTED BEARD
             </span>
@@ -1769,17 +2120,25 @@ function BeardsPage({
             <strong>
               {selectedBeard}
             </strong>
+
           </div>
 
-          <button onClick={onBook}>
+          <button
+            onClick={onBook}
+          >
             CONTINUE TO BOOK
-            <span>→</span>
+            <span>
+              →
+            </span>
           </button>
+
         </section>
       )}
 
       <section className="haircuts-bottom">
+
         <div>
+
           <span>
             READY FOR A CHANGE?
           </span>
@@ -1787,17 +2146,26 @@ function BeardsPage({
           <h2>
             BOOK YOUR
             <br />
-            <em>APPOINTMENT.</em>
+            <em>
+              APPOINTMENT.
+            </em>
           </h2>
+
         </div>
 
-        <button onClick={onBook}>
+        <button
+          onClick={onBook}
+        >
           BOOK NOW
-          <span>↗</span>
+          <span>
+            ↗
+          </span>
         </button>
+
       </section>
 
       <footer className="haircuts-footer">
+
         <div className="haircuts-footer-logo">
           THE<span>CUT</span>
         </div>
@@ -1808,9 +2176,12 @@ function BeardsPage({
           PRECISION · STYLE · IDENTITY
         </p>
 
-        <button onClick={onBack}>
+        <button
+          onClick={onBack}
+        >
           BACK TO HOME ↑
         </button>
+
       </footer>
 
     </main>
