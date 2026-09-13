@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import heroImage from "./hero.jpg";
+import heroImage from "./IMG_0660.jpeg";
 
 const WHATSAPP_NUMBER = "91XXXXXXXXXX";
 
@@ -397,7 +397,11 @@ Please confirm my appointment.
           <div className="service-list">
             {services.map((service) => (
               <div
-                className="service-row"
+                className={`service-row ${
+                  selectedService === service.name
+                    ? "selected"
+                    : ""
+                }`}
                 key={service.number}
                 onClick={() =>
                   setSelectedService(service.name)
@@ -498,9 +502,7 @@ Please confirm my appointment.
           <div className="signature-content">
             <div className="signature-item active">
               <span>01</span>
-
               <h3>THE TAPER</h3>
-
               <p>
                 Clean sides. Natural finish.
                 Perfect for everyday style.
@@ -509,9 +511,7 @@ Please confirm my appointment.
 
             <div className="signature-item">
               <span>02</span>
-
               <h3>SKIN FADE</h3>
-
               <p>
                 Maximum contrast with
                 razor-sharp detailing.
@@ -520,9 +520,7 @@ Please confirm my appointment.
 
             <div className="signature-item">
               <span>03</span>
-
               <h3>TEXTURED CROP</h3>
-
               <p>
                 Contemporary texture with
                 effortless movement.
@@ -531,9 +529,7 @@ Please confirm my appointment.
 
             <div className="signature-item">
               <span>04</span>
-
               <h3>CLASSIC</h3>
-
               <p>
                 Timeless shape with
                 modern precision.
@@ -559,9 +555,7 @@ Please confirm my appointment.
             <div className="why-list">
               <div>
                 <span>01</span>
-
                 <h3>PRECISION</h3>
-
                 <p>
                   Every line, fade and transition
                   is finished with intention.
@@ -570,9 +564,7 @@ Please confirm my appointment.
 
               <div>
                 <span>02</span>
-
                 <h3>PERSONAL</h3>
-
                 <p>
                   Your haircut is designed around
                   your face and individual style.
@@ -581,9 +573,7 @@ Please confirm my appointment.
 
               <div>
                 <span>03</span>
-
                 <h3>DETAIL</h3>
-
                 <p>
                   Clean finishing, sharp edges
                   and attention to the smallest details.
@@ -592,9 +582,7 @@ Please confirm my appointment.
 
               <div>
                 <span>04</span>
-
                 <h3>MODERN</h3>
-
                 <p>
                   Contemporary styles without
                   losing timeless craftsmanship.
@@ -636,7 +624,6 @@ Please confirm my appointment.
 
                 <div className="review-author">
                   <strong>{review.name}</strong>
-
                   <span>{review.role}</span>
                 </div>
               </article>
@@ -675,7 +662,6 @@ Please confirm my appointment.
 
                 <div>
                   <strong>WHATSAPP BOOKING</strong>
-
                   <p>
                     Your appointment request will be
                     sent directly to the barber.
@@ -817,7 +803,6 @@ Please confirm my appointment.
             <div className="location-info">
               <div>
                 <span>LOCATION</span>
-
                 <p>
                   Your Salon Name
                   <br />
@@ -827,7 +812,6 @@ Please confirm my appointment.
 
               <div>
                 <span>OPENING HOURS</span>
-
                 <p>
                   MON — SAT
                   <br />
@@ -837,7 +821,6 @@ Please confirm my appointment.
 
               <div>
                 <span>CONTACT</span>
-
                 <p>
                   WhatsApp
                   <br />
