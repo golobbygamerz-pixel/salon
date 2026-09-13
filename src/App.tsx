@@ -10,6 +10,11 @@ import midlineImage from "./IMG_0674.jpeg";
 import wolfImage from "./IMG_0675.jpeg";
 import modCutImage from "./IMG_0677.jpeg";
 
+import fullBeardImage from "./IMG_0681.jpeg";
+import fadeBeardImage from "./IMG_0682.jpeg";
+import goateeBeardImage from "./IMG_0683.jpeg";
+import cleanShaveImage from "./IMG_0684.jpeg";
+
 const WHATSAPP_NUMBER = "919310151087";
 
 const services = [
@@ -127,6 +132,41 @@ const haircutStyles = [
   },
 ];
 
+const beardStyles = [
+  {
+    number: "01",
+    name: "Full Beard",
+    price: "₹299",
+    description:
+      "A strong, full beard with clean edges and a naturally powerful finish.",
+    image: fullBeardImage,
+  },
+  {
+    number: "02",
+    name: "Fade Beard",
+    price: "₹349",
+    description:
+      "Sharp cheek lines with a smooth fade for a clean and modern beard profile.",
+    image: fadeBeardImage,
+  },
+  {
+    number: "03",
+    name: "Goatee Beard",
+    price: "₹249",
+    description:
+      "Defined moustache and chin detailing for a sharp, minimal and confident look.",
+    image: goateeBeardImage,
+  },
+  {
+    number: "04",
+    name: "Clean Shave",
+    price: "₹199",
+    description:
+      "A completely clean finish with smooth detailing for a fresh, refined look.",
+    image: cleanShaveImage,
+  },
+];
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [date, setDate] = useState("");
@@ -134,13 +174,18 @@ function App() {
   const [selectedService, setSelectedService] = useState("Haircut");
 
   const [currentPage, setCurrentPage] = useState<
-    "home" | "haircuts"
+    "home" | "haircuts" | "beards"
   >("home");
 
   const [selectedHaircut, setSelectedHaircut] = useState("");
+  const [selectedBeard, setSelectedBeard] = useState("");
 
   const selectedHaircutData = haircutStyles.find(
     (style) => style.name === selectedHaircut
+  );
+
+  const selectedBeardData = beardStyles.find(
+    (style) => style.name === selectedBeard
   );
 
   const scrollTo = (id: string) => {
@@ -165,6 +210,16 @@ function App() {
     });
   };
 
+  const openBeards = () => {
+    setCurrentPage("beards");
+    setMenuOpen(false);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const goHome = () => {
     setCurrentPage("home");
 
@@ -178,7 +233,26 @@ function App() {
 
   const selectHaircut = (style: string) => {
     setSelectedHaircut(style);
+    setSelectedBeard("");
     setSelectedService("Haircut");
+  };
+
+  const selectBeard = (style: string) => {
+    setSelectedBeard(style);
+    setSelectedHaircut("");
+    setSelectedService("Beard Trim");
+  };
+
+  const handleServiceChange = (service: string) => {
+    setSelectedService(service);
+
+    if (service !== "Haircut") {
+      setSelectedHaircut("");
+    }
+
+    if (service !== "Beard Trim") {
+      setSelectedBeard("");
+    }
   };
 
   const continueToBooking = () => {
@@ -194,12 +268,33 @@ function App() {
   const bookAppointment = (e?: FormEvent) => {
     e?.preventDefault();
 
-    const message =
+    let message =
       `*NEW APPOINTMENT REQUEST*\n\n` +
-      `Service: ${selectedService}\n` +
-      `Haircut Style: ${
-        selectedHaircut || "Not selected"
-      }\n` +
+      `Service: ${selectedService}\n`;
+
+    if (selectedService === "Haircut") {
+      message +=
+        `Haircut Style: ${
+          selectedHaircut || "Not selected"
+        }\n`;
+
+      if (selectedHaircutData) {
+        message += `Price: ${selectedHaircutData.price}\n`;
+      }
+    }
+
+    if (selectedService === "Beard Trim") {
+      message +=
+        `Beard Style: ${
+          selectedBeard || "Not selected"
+        }\n`;
+
+      if (selectedBeardData) {
+        message += `Price: ${selectedBeardData.price}\n`;
+      }
+    }
+
+    message +=
       `Date: ${date || "Not selected"}\n` +
       `Time: ${time || "Not selected"}\n\n` +
       `I would like to book an appointment.`;
@@ -218,6 +313,17 @@ function App() {
         selectedHaircut={selectedHaircut}
         onBack={goHome}
         onSelect={selectHaircut}
+        onBook={continueToBooking}
+      />
+    );
+  }
+
+  if (currentPage === "beards") {
+    return (
+      <BeardsPage
+        selectedBeard={selectedBeard}
+        onBack={goHome}
+        onSelect={selectBeard}
         onBook={continueToBooking}
       />
     );
@@ -447,6 +553,10 @@ function App() {
               onClick={() => {
                 if (service.title === "Haircut") {
                   openHaircuts();
+                } else if (
+                  service.title === "Beard Trim"
+                ) {
+                  openBeards();
                 } else {
                   setSelectedService(
                     service.title
@@ -481,6 +591,11 @@ function App() {
                         "Haircut"
                       ) {
                         openHaircuts();
+                      } else if (
+                        service.title ===
+                        "Beard Trim"
+                      ) {
+                        openBeards();
                       } else {
                         setSelectedService(
                           service.title
@@ -758,7 +873,7 @@ function App() {
                 <select
                   value={selectedService}
                   onChange={(e) =>
-                    setSelectedService(
+                    handleServiceChange(
                       e.target.value
                     )
                   }
@@ -802,6 +917,36 @@ function App() {
 
                   <strong className="selected-haircut-price">
                     {selectedHaircutData?.price}
+                  </strong>
+
+                </div>
+              </div>
+            )}
+
+            {selectedBeard && (
+              <div className="booking-field-group">
+                <label>
+                  SELECTED BEARD
+                </label>
+
+                <div className="selected-haircut-card">
+
+                  <div className="selected-haircut-icon">
+                    ✦
+                  </div>
+
+                  <div className="selected-haircut-info">
+                    <strong>
+                      {selectedBeard}
+                    </strong>
+
+                    <span>
+                      BEARD STYLE
+                    </span>
+                  </div>
+
+                  <strong className="selected-haircut-price">
+                    {selectedBeardData?.price}
                   </strong>
 
                 </div>
@@ -1166,6 +1311,245 @@ function HaircutsPage({
 
             <strong>
               {selectedHaircut}
+            </strong>
+          </div>
+
+          <button onClick={onBook}>
+            CONTINUE TO BOOK
+            <span>→</span>
+          </button>
+        </section>
+      )}
+
+      <section className="haircuts-bottom">
+        <div>
+          <span>
+            READY FOR A CHANGE?
+          </span>
+
+          <h2>
+            BOOK YOUR
+            <br />
+            <em>APPOINTMENT.</em>
+          </h2>
+        </div>
+
+        <button onClick={onBook}>
+          BOOK NOW
+          <span>↗</span>
+        </button>
+      </section>
+
+      <footer className="haircuts-footer">
+        <div className="haircuts-footer-logo">
+          THE<span>CUT</span>
+        </div>
+
+        <p>
+          MEN'S HAIR ARTIST
+          <br />
+          PRECISION · STYLE · IDENTITY
+        </p>
+
+        <button onClick={onBack}>
+          BACK TO HOME ↑
+        </button>
+      </footer>
+
+    </main>
+  );
+}
+
+
+/* =====================================================
+   BEARDS PAGE
+   Same premium glass design as Haircuts
+===================================================== */
+
+function BeardsPage({
+  selectedBeard,
+  onBack,
+  onSelect,
+  onBook,
+}: {
+  selectedBeard: string;
+  onBack: () => void;
+  onSelect: (style: string) => void;
+  onBook: () => void;
+}) {
+  return (
+    <main className="haircuts-page">
+
+      <header className="haircuts-nav">
+        <button
+          className="haircuts-logo"
+          onClick={onBack}
+        >
+          THE<span>CUT</span>
+        </button>
+
+        <nav className="haircuts-nav-links">
+          <button onClick={onBack}>
+            HOME
+          </button>
+
+          <span>SERVICES</span>
+          <span>ABOUT</span>
+          <span>GALLERY</span>
+          <span>CONTACT</span>
+        </nav>
+
+        <button
+          className="haircuts-book"
+          onClick={onBook}
+        >
+          BOOK APPOINTMENT
+          <span>↗</span>
+        </button>
+      </header>
+
+      <section className="haircuts-hero">
+        <div className="haircuts-hero-content">
+          <p className="haircuts-eyebrow">
+            OUR SERVICES
+          </p>
+
+          <h1>
+            Beard Trim
+            <br />
+            <em>Find Your Style.</em>
+          </h1>
+
+          <p className="haircuts-hero-text">
+            From a powerful full beard to a
+            clean shave, choose the beard style
+            that defines your look.
+          </p>
+        </div>
+
+        <div className="haircuts-hero-side">
+          <span />
+          <p>
+            Sharp lines,
+            <br />
+            stronger presence.
+          </p>
+        </div>
+      </section>
+
+      <section className="haircut-selection">
+        <div className="haircut-section-heading">
+          <div>
+            <span>
+              01 / CHOOSE YOUR LOOK
+            </span>
+
+            <h2>
+              SELECT YOUR
+              <br />
+              <em>BEARD.</em>
+            </h2>
+          </div>
+
+          <p>
+            Choose the beard style you want.
+            Your selection will be added to
+            your appointment request.
+          </p>
+        </div>
+
+        <div className="haircut-grid">
+          {beardStyles.map((style) => {
+            const isSelected =
+              selectedBeard === style.name;
+
+            return (
+              <motion.article
+                className={`haircut-card ${
+                  isSelected
+                    ? "haircut-selected"
+                    : ""
+                }`}
+                key={style.name}
+                initial={{
+                  opacity: 0,
+                  y: 30,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                }}
+                transition={{
+                  duration: 0.5,
+                }}
+              >
+                <div className="haircut-image">
+                  <img
+                    src={style.image}
+                    alt={style.name}
+                  />
+
+                  <div className="haircut-number">
+                    {style.number}
+                  </div>
+                </div>
+
+                <div className="haircut-info">
+
+                  <p className="haircut-small">
+                    BEARD / {style.number}
+                  </p>
+
+                  <h3>{style.name}</h3>
+
+                  <p className="haircut-description">
+                    {style.description}
+                  </p>
+
+                  <div className="haircut-action-box">
+
+                    <strong className="haircut-price">
+                      {style.price}
+                    </strong>
+
+                    <button
+                      className="haircut-select"
+                      onClick={() =>
+                        onSelect(style.name)
+                      }
+                    >
+                      {isSelected
+                        ? "SELECTED"
+                        : "SELECT"}
+
+                      <span>
+                        {isSelected
+                          ? "✓"
+                          : "→"}
+                      </span>
+                    </button>
+
+                  </div>
+
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+      </section>
+
+      {selectedBeard && (
+        <section className="selected-style-bar">
+          <div>
+            <span>
+              YOUR SELECTED BEARD
+            </span>
+
+            <strong>
+              {selectedBeard}
             </strong>
           </div>
 
